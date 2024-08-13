@@ -1,0 +1,16 @@
+{
+    "users" : [
+        {
+            "userID": "1",
+            "login": "fiz",
+            "password": "123",
+            "email": "sebastien.guibourdin@gmail.com",
+            "googleID": "",
+            "lastLoggedIn": 0,
+            "createdAt": 0,
+            "updatedAt": 0,
+            "Status": 1,
+            "profileID": 1
+        }
+    ]
+}
