@@ -10,6 +10,11 @@ npm install
 npm run serve
 ```
 
+### Run json-server instance
+```
+npx json-server -w ./data/db.json
+```
+
 ### Compiles and minifies for production
 ```
 npm run build

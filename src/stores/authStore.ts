@@ -1,3 +1,4 @@
+// Pinia defineStore
 import { defineStore } from 'pinia'
 
 // Types imports
@@ -6,13 +7,17 @@ import LogType from '@/types/LogType'
 
 // Config import
 import conf from '@/../onceConfig'
+
+// Utils
 import idGenerator from '@/composables/utils/idGenerator'
 
 // Cookie related imports
 import { VueCookies } from 'vue-cookies';
 
+// User API
 import usersApi from '@/composables/api/User'
 
+// State type of the authentication store
 type State = {
     user: User | null
     errorText: string | null
@@ -52,9 +57,10 @@ const useAuthStore = defineStore('authStore', {
             if (user.length > 0) {
                 this.user = user[0]
                 this.errorText = null
-                this.isLoggedIn = true;
+                this.isLoggedIn = true
                 this.cookies?.set('accessToken', idGenerator(conf.accessTokenLenght))
                 this.cookies?.set('userId', this.user.userID)
+                //Update lastLoggedIn
                 return true
             } else {
                 this.errorText = 'The combinaison login/password doesn\'t match'
@@ -65,7 +71,7 @@ const useAuthStore = defineStore('authStore', {
             //console.log("Logout function");
             this.cookies?.remove('accessToken')
             this.cookies?.remove('userId')
-            this.isLoggedIn = false;
+            this.isLoggedIn = false
 
         },
         async register(login: string, password: string, email: string): Promise<void> {
@@ -84,21 +90,21 @@ const useAuthStore = defineStore('authStore', {
                 profileID: idGenerator(conf.profileIdLength),
             }
             const data = await usersApi.addUser(newUser)
-            this.showForm = 'login';
-            console.log(data);
+            this.showForm = 'login'
+            console.log(data)
         },
         checkLogStatus(): void {
             if (this.cookies && this.cookies.get('accessToken') === null) {
-                this.isLoggedIn = false;
+                this.isLoggedIn = false
               } else {
-                this.isLoggedIn = true;
+                this.isLoggedIn = true
               }
         },
         setCookieObj(cookies: VueCookies | undefined) {
             this.cookies = cookies
         },
         setShowForm(mode: LogType) : void {
-            this.showForm = mode;
+            this.showForm = mode
         }
     }
 })

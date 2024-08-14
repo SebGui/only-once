@@ -15,15 +15,14 @@ const addUser = async (user: User): Promise<boolean> => {
     });
 }
 
-/*async function getUsers(): Promise<User[]> {
-    return requestMaker(conf.uris.getUsers);
-}*/
+const updateUser = async (user: User): Promise<boolean> => {
+    return requestMaker(conf.uris.getUsers, {
+        method: 'PATCH',
+        body: JSON.stringify(user),
+        headers: {'Content-Type': 'application/json'}
+    });
+}
 
-
-/*const getUsers2 = async (): Promise<User[]> => {
-    return requestMaker(conf.uris.getUsers);
-}*/
-
-export default {getUsers, addUser}/*, getUsers2*/
+export default {getUsers, addUser, updateUser}
 
 
