@@ -4,7 +4,7 @@
 
         <div class="borders">
             <LoginForm v-if="showForm === 'login'" />
-            <h2 v-if="showForm === 'register'">Register form</h2>
+            <RegisterForm v-if="showForm === 'register'"/>
             <h2 v-if="showForm === 'forgot'">Forgot Password form</h2>
         </div>
     </div>
@@ -15,11 +15,14 @@
   import { storeToRefs } from "pinia";
 
   import LoginForm from '@/components/LoginForm.vue'
+  import RegisterForm from '@/components/RegisterForm.vue'
 
   const authStore = useAuthStore();
   const { showForm } = storeToRefs(authStore)
 </script>
 
 <style scoped>
-
+    .borders {
+        max-width: 1000px;
+    }
 </style>
