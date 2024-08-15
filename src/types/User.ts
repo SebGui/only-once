@@ -1,6 +1,7 @@
 import Status from '@/types/Status'
 
 interface User {
+    id: String,
     userID: string,
     login: string,
     password: string,

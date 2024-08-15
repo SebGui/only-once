@@ -21,6 +21,7 @@ import usersApi from '@/composables/api/User'
 type State = {
     user: User | null
     errorText: string | null
+    successText: string | null
     isLoggedIn: boolean
     showForm: LogType
     cookies: VueCookies | undefined
@@ -33,13 +34,11 @@ const useAuthStore = defineStore('authStore', {
         errorText: null,
         isLoggedIn: false,
         showForm: 'login',
+        successText: null,
         cookies: undefined
     }),
     getters: {
         // Getters related to user datas
-        test() {
-            console.log("test");
-        }
     },
     actions: {
         async login(login: string, password: string): Promise<boolean> {
@@ -63,7 +62,7 @@ const useAuthStore = defineStore('authStore', {
                 //Update lastLoggedIn
                 return true
             } else {
-                this.errorText = 'The combinaison login/password doesn\'t match'
+                this.setErrorText('The combinaison login/password doesn\'t match')
                 return false
             }
         },
@@ -74,10 +73,23 @@ const useAuthStore = defineStore('authStore', {
             this.isLoggedIn = false
 
         },
-        async register(login: string, password: string, email: string): Promise<void> {
+        async register(login: string, password: string, email: string): Promise<boolean> {
             console.log('REgister function');
-            // check if user exists
+
+            // Check if user exists
+            let userExists = false
+            userExists = await usersApi.getUserByLogin(login).then((res) => {
+                if (res.length > 0) {
+                    this.setErrorText('This login is not available')
+                    return true;
+                }
+                return false;
+            });
+            if (userExists === true) {return false}
+
+            // User creation
             const newUser: User = {
+                id: idGenerator(conf.userIdLength),
                 userID: idGenerator(conf.userIdLength),
                 login: login,
                 password: password,
@@ -87,11 +99,36 @@ const useAuthStore = defineStore('authStore', {
                 createdAt: new Date().getTime(),
                 updatedAt: new Date().getTime(),
                 Status: 1,
-                profileID: idGenerator(conf.profileIdLength),
+                profileID: idGenerator(conf.profileIdLength)
             }
-            const data = await usersApi.addUser(newUser)
+            await usersApi.addUser(newUser)
             this.showForm = 'login'
-            console.log(data)
+            this.setSuccessText('Account created, please login.')
+            return true;
+        },
+        async setForgotForm(email: string, newPass: string): Promise<string[] | boolean> {
+            let userExists
+            let userObj: User;
+
+            userExists = await usersApi.getUserByEmail(email).then(async (res) => {
+                if (res.length === 0) {
+                    this.setErrorText('Entry not found')// Might change to simple "if user is found you will receive an email shortly" for security
+                    userExists = false
+                    return false;
+                } else {
+                    userExists = true
+                }
+                userObj = res[0]
+
+                if (userExists === false || userObj === null) {return false}
+
+                userObj.password = newPass
+                userObj.updatedAt = new Date().getTime()
+                await usersApi.updateUser(userObj)
+                return true
+            });
+
+            return userExists
         },
         checkLogStatus(): void {
             if (this.cookies && this.cookies.get('accessToken') === null) {
@@ -105,6 +142,16 @@ const useAuthStore = defineStore('authStore', {
         },
         setShowForm(mode: LogType) : void {
             this.showForm = mode
+            this.errorText = null
+            this.successText = null
+        },
+        setErrorText(text: string) {
+            this.errorText = text
+            this.successText = null
+        },
+        setSuccessText(text: string) {
+            this.errorText = null
+            this.successText = text
         }
     }
 })

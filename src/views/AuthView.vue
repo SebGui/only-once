@@ -5,7 +5,7 @@
         <div class="borders">
             <LoginForm v-if="showForm === 'login'" />
             <RegisterForm v-if="showForm === 'register'"/>
-            <h2 v-if="showForm === 'forgot'">Forgot Password form</h2>
+            <ForgotPasswordForm v-if="showForm === 'forgot'"/>
         </div>
     </div>
 </template>
@@ -16,6 +16,7 @@
 
   import LoginForm from '@/components/LoginForm.vue'
   import RegisterForm from '@/components/RegisterForm.vue'
+  import ForgotPasswordForm from '@/components/ForgotPasswordForm.vue'
 
   const authStore = useAuthStore();
   const { showForm } = storeToRefs(authStore)

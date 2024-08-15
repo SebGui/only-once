@@ -7,6 +7,7 @@
             <input type="email" placeholder="Enter your email..." v-model="email" required>
 
             <span v-if="authStore.errorText != null" class="errorText">{{ authStore.errorText }}</span>
+            <span v-if="authStore.successText != null" class="successText">{{ authStore.successText }}</span>
 
             <button>Submit</button>
         </form>
@@ -28,6 +29,10 @@
     // Types
     import LogType from '@/types/LogType'
 
+    // Utils
+    import {Md5} from 'ts-md5';
+    import conf from '@/../onceConfig'
+
     const authStore = useAuthStore()
 
     // Login refs
@@ -43,9 +48,19 @@
 
     const handleRegister = () => {
         console.log("register handler")
-        // check if fields are valid?
+        // Salt and hash user data
+        const hashedLogin = Md5.hashStr(conf.salt + login.value)
+        const hashedPassword = Md5.hashStr(conf.salt + password.value)
+        const hashedConfirmPassword = Md5.hashStr(conf.salt + confirmPassword.value)
 
-        //authStore.register(login.value, password.value, email.value);
+        // check if fields are valid?
+        if (hashedPassword === hashedConfirmPassword) {
+            authStore.register(hashedLogin, hashedPassword, email.value);
+        } else {
+            authStore.setErrorText("The password and the confirmation are different")
+            // Highlight field ?
+        }
+
     }
 </script>
 
@@ -73,5 +88,8 @@
     }
     .errorText {
         color: var(--main-error-color);
+    }
+    .successText {
+        color: var(--main-success-color);
     }
 </style>

@@ -5,6 +5,7 @@
             <input type="password" placeholder="Enter your password..." v-model="password" required>
 
             <span v-if="authStore.errorText != null" class="errorText">{{ authStore.errorText }}</span>
+            <span v-if="authStore.successText != null" class="successText">{{ authStore.successText }}</span>
 
             <button>Submit</button>
         </form>
@@ -21,6 +22,10 @@
     import useAuthStore from '@/stores/authStore'
     import LogType from '@/types/LogType'
 
+    // Utils
+    import { Md5 } from 'ts-md5';
+    import conf from '@/../onceConfig'
+
     const authStore = useAuthStore()
 
     // Login refs
@@ -34,13 +39,13 @@
 
     // Handle login flow 
     const handleLogin = async (): Promise<void> => {
-        if (login.value.length > 0 && password.value.length > 0) {
-            await authStore.login(login.value, password.value)
-                .then((/*res*/) => {
-                    /* Any after job */
-                });
-        }
-        console.log('login function');
+        const hashedLogin = Md5.hashStr(conf.salt + login.value)
+        const hashedPassword = Md5.hashStr(conf.salt + password.value)
+
+        await authStore.login(hashedLogin, hashedPassword)
+            .then((/*res*/) => {
+                /* Any after job */
+            });
     }
 </script>
 
@@ -68,5 +73,8 @@
     }
     .errorText {
         color: var(--main-error-color);
+    }
+    .successText {
+        color: var(--main-success-color);
     }
 </style>

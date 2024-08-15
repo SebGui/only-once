@@ -16,13 +16,23 @@ const addUser = async (user: User): Promise<boolean> => {
 }
 
 const updateUser = async (user: User): Promise<boolean> => {
-    return requestMaker(conf.uris.getUsers, {
+    return requestMaker(conf.uris.updateUsers+user.id, {
         method: 'PATCH',
         body: JSON.stringify(user),
         headers: {'Content-Type': 'application/json'}
     });
 }
 
-export default {getUsers, addUser, updateUser}
+const getUserByLogin = async (login: string): Promise<User[]> => {
+    console.log(requestMaker(conf.uris.getUserByName + login));
+    return requestMaker(conf.uris.getUserByName + login);
+}
+
+const getUserByEmail = async (email: string): Promise<User[]> => {
+    //console.log(requestMaker(conf.uris.getUserByName + email));
+    return requestMaker(conf.uris.getUserByEmail + email);
+}
+
+export default {getUsers, addUser, updateUser, getUserByLogin, getUserByEmail}
 
 
