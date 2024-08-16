@@ -16,6 +16,10 @@
     /* Status colors */
     --main-error-color: rgb(255, 40, 40);
     --main-success-color: rgb(40, 244, 40);
+    /* Sidebar size */
+    --sidebar-width: 15rem;
+    /*TopNav height*/
+    --topnav-height: 87px;
 }
 
 body {
@@ -24,11 +28,13 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: var(--main-text-color);
+    margin:0;
 }
 
 .mainContent {
-    margin: 40px auto;
-    background-color: var(--main-bg-clear);
+    margin: 0 auto;
+    /*background-color: var(--main-bg-clear);*/
+    display: flex;
 }
 
 .borders {

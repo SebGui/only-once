@@ -2,28 +2,23 @@
   <AuthView v-if="!isLoggedIn"/>
 
   <div v-if="isLoggedIn === true" class="mainContent">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <!-- Make nav component-->
+    <SideBarView/>
 
-    <!-- Make Sidebar component-->
-
-    <router-view/>
-
+    <ContentView />
     <!-- Make Footer component-->
   </div>
 </template>
 
 <script setup lang="ts">
-  //import { storeToRefs } from 'pinia' 
   import useAuthStore from '@/stores/authStore'
 
   import AuthView from '@/views/AuthView.vue'
   import { storeToRefs } from 'pinia';
   import { inject, onMounted, onUpdated } from 'vue';
   import { VueCookies } from 'vue-cookies';
+
+  import SideBarView from './views/SideBarView.vue';
+  import ContentView from './views/ContentView.vue';
 
   const authStore = useAuthStore()
   const { isLoggedIn } = storeToRefs(authStore)

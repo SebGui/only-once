@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="handleForgotEmail" id="theForn" ref="form">
+        <form @submit.prevent="handleForgotEmail" id="forgotForm" ref="form">
             <input type="email" placeholder="Enter your email..." name="user_email" v-model="email" required autofocus>
             <input type="text" name="user_name" value='Only-Once user' hidden>
             <textarea name="message" hidden v-model="body"></textarea>

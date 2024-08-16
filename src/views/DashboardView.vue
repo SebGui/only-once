@@ -1,8 +1,8 @@
 <template>
     <div>
         Dash board
-
-        <button @click="handleLogout">Logout</button>
+        <!-- Make Single stat component : 1 number, 1 img/graph, 1 text
+              Make a stat type with store -->
     </div>
 </template>
 
@@ -11,9 +11,7 @@
   import { onMounted, onUpdated } from 'vue';
   
   const authStore = useAuthStore()
-  const handleLogout = () => {
-      authStore.logout()
-  }
+
   
   /* Lifecycles hooks*/
   onMounted(() => {

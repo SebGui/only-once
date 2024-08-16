@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="handleLogin" id="loginForm">
             <input type="text" placeholder="Enter your login..." v-model="login" required autofocus>
             <input type="password" placeholder="Enter your password..." v-model="password" required>
 
