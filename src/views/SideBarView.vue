@@ -25,5 +25,6 @@
     align-content: center;
     flex-wrap: wrap;
     font-size: 24px;
+    background-color: var(--main-bg-color-darken);
 }
 </style>

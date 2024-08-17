@@ -15,5 +15,12 @@
 </script>
 
 <style scoped>
+    div {
+        color:white;
+        font-weight: bold;
+    }
+    i {
+        margin-right:10px;
+    }
 
 </style>

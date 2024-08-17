@@ -3,6 +3,9 @@
     --main-bg-clear: rgb(211, 211, 211);
     --main-bg-white: white;
     --main-bg-color: rgb(0, 251, 255);
+    --main-text-color: rgb(0, 251, 255);
+    --main-text-color-white: white;
+    --main-bg-color-darken: rgb(0, 226, 230);
     --main-bg-color-trsp: rgb(0 251 255 / 32%);
     --main-text-color: #2c3e50;
     --main-text-color-hover: rgb(0, 251, 255);
@@ -20,6 +23,8 @@
     --sidebar-width: 15rem;
     /*TopNav height*/
     --topnav-height: 87px;
+    /* Stats card width */
+    --stats-card-width: 300px;
 }
 
 body {
@@ -29,6 +34,14 @@ body {
     text-align: center;
     color: var(--main-text-color);
     margin:0;
+}
+
+.unselectable{
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 .mainContent {
