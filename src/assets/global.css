@@ -3,7 +3,7 @@
     --main-bg-clear: rgb(211, 211, 211);
     --main-bg-white: white;
     --main-bg-color: rgb(0, 251, 255);
-    --main-text-color: rgb(0, 251, 255);
+    --main-text-color-light: rgb(0, 251, 255);
     --main-text-color-white: white;
     --main-bg-color-darken: rgb(0, 226, 230);
     --main-bg-color-trsp: rgb(0 251 255 / 32%);
@@ -21,10 +21,15 @@
     --main-success-color: rgb(40, 244, 40);
     /* Sidebar size */
     --sidebar-width: 15rem;
-    /*TopNav height*/
+    /* TopNav */
     --topnav-height: 87px;
+    --topnav-available: #00c700;
+    --topnav-idle: #f8b842;
+    --topnav-not-available: #ff0000;
     /* Stats card width */
     --stats-card-width: 300px;
+    --body-min-width: 580px;
+
 }
 
 body {
@@ -34,6 +39,7 @@ body {
     text-align: center;
     color: var(--main-text-color);
     margin:0;
+    min-width: var(--body-min-width);
 }
 
 .unselectable{
@@ -96,4 +102,14 @@ input:active, input:focus {
   
 ::-ms-input-placeholder { /* Edge 12 -18 */
     color: var(--main-placeholder-color);
+}
+
+.statusAvailable {
+    color : var(--topnav-available);
+}
+.statusIdle {
+    color : var(--topnav-idle);
+}
+.statusNotAvailable {
+    color : var(--topnav-not-available);
 }

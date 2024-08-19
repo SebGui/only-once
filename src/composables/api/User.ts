@@ -7,6 +7,10 @@ const getUsers = async (): Promise<User[]> => {
     return requestMaker(conf.uris.getUsers, {});
 }
 
+const getUser = async (id:string): Promise<User[]> => {
+    return requestMaker(conf.uris.getUser+id, {});
+}
+
 const addUser = async (user: User): Promise<boolean> => {
     return requestMaker(conf.uris.getUsers, {
         method: 'POST',
@@ -33,6 +37,6 @@ const getUserByEmail = async (email: string): Promise<User[]> => {
     return requestMaker(conf.uris.getUserByEmail + email);
 }
 
-export default {getUsers, addUser, updateUser, getUserByLogin, getUserByEmail}
+export default {getUsers, getUser, addUser, updateUser, getUserByLogin, getUserByEmail}
 
 

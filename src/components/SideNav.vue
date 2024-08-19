@@ -21,7 +21,7 @@
 
 <style scoped>
     .sideNav {
-        height: calc(100vh - var(--topnav-height));
+        height: calc(100vh - var(--topnav-height) - 10px);
         border-right: 1px solid lightgray;
         margin-top: 0;
         list-style-type: none;

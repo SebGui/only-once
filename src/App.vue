@@ -14,7 +14,7 @@
 
   import AuthView from '@/views/AuthView.vue'
   import { storeToRefs } from 'pinia';
-  import { inject, onMounted, onUpdated } from 'vue';
+  import { inject, onUpdated, onBeforeMount } from 'vue';
   import { VueCookies } from 'vue-cookies';
 
   import SideBarView from './views/SideBarView.vue';
@@ -25,10 +25,11 @@
 
   const $cookies = inject<VueCookies>('$cookies');
 
-  onMounted(() => {
+  onBeforeMount(() => {
     authStore.setCookieObj($cookies)
     authStore.checkLogStatus()
   })
+
   onUpdated(() => {
     authStore.checkLogStatus()
   })

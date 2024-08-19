@@ -1,3 +1,5 @@
+//import { isProxy, toRaw } from 'vue';
+
 // Pinia defineStore
 import { defineStore } from 'pinia'
 
@@ -16,6 +18,7 @@ import { VueCookies } from 'vue-cookies';
 
 // User API
 import usersApi from '@/composables/api/User'
+import Status from '@/types/Status'
 
 // State type of the authentication store
 type State = {
@@ -39,6 +42,9 @@ const useAuthStore = defineStore('authStore', {
     }),
     getters: {
         // Getters related to user datas
+        getStatus():Status {
+            return (this.user != undefined) ? this.user.Status : 1
+        }
     },
     actions: {
         async login(login: string, password: string): Promise<boolean> {
@@ -135,7 +141,22 @@ const useAuthStore = defineStore('authStore', {
                 this.isLoggedIn = false
               } else {
                 this.isLoggedIn = true
+                if (this.user === null) {
+                    this.setUser()
+                }
               }
+        },
+        // Setters
+        async updateUser(/*userObj: User*/): Promise<void> {
+            if (this.user) {
+                await usersApi.updateUser(this.user)
+            }
+        },
+        async setUser(): Promise<void> {
+            await usersApi.getUser(this.cookies?.get('userId'))
+            .then( (res) => {
+                this.user = res[0]
+            })
         },
         setCookieObj(cookies: VueCookies | undefined) {
             this.cookies = cookies

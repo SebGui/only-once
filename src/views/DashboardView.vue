@@ -8,20 +8,20 @@
 </template>
 
 <script setup lang="ts">
-  import useAuthStore from '@/stores/authStore';
-  import { onMounted, onUpdated } from 'vue';
+  //import useAuthStore from '@/stores/authStore';
+  //import { onMounted, onUpdated } from 'vue';
   import StatsList from '@/components/StatsList.vue';
   
-  const authStore = useAuthStore()
+  //const authStore = useAuthStore()
 
   
   /* Lifecycles hooks*/
-  onMounted(() => {
+  /*onMounted(() => {
     authStore.checkLogStatus()
   })
   onUpdated(() => {
     authStore.checkLogStatus()
-  })
+  })*/
 </script>
 
 <style scoped>

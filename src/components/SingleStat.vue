@@ -1,17 +1,22 @@
 <template>
-    <div class="unselectable">
-        <i class="material-icons">{{ icon }}</i>
-        <h3>{{ amount }} Views</h3>
-        <p>{{ sentence }}</p>
+    <div v-if="stat" class="unselectable">
+        <i class="material-icons">{{ stat.icon }}</i>
+        <h3>{{ stat.amount }} Time</h3>
+        <p>{{ stat.desc }}</p>
     </div>
 </template>
 
 <script setup lang="ts">
-    import {defineProps} from 'vue'
+    import Stat from '@/types/Stat';
+import { PropType, defineProps } from 'vue';
+    /*import {defineProps} from 'vue'
     defineProps({
         amount: {required:true},
         icon: {required:true},
         sentence: {required:true}
+    })*/
+    defineProps({
+        stat: Object as PropType<Stat>
     })
 </script>
 
@@ -45,5 +50,6 @@
     }
     p {
         margin-top: 0px;
+        font-size: 15px;
     }
 </style>
