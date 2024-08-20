@@ -74,6 +74,7 @@
     background-color: var(--main-bg-white);
     color: var(--main-text-color);
     font-weight:300;
+    min-width: var(--select-opt-width);
   }
   .dropdownContainer div {
     padding:10px;

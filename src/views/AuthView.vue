@@ -14,9 +14,9 @@
   import useAuthStore from "@/stores/authStore";
   import { storeToRefs } from "pinia";
 
-  import LoginForm from '@/components/LoginForm.vue'
-  import RegisterForm from '@/components/RegisterForm.vue'
-  import ForgotPasswordForm from '@/components/ForgotPasswordForm.vue'
+  import LoginForm from '@/components/auth/LoginForm.vue'
+  import RegisterForm from '@/components/auth/RegisterForm.vue'
+  import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm.vue'
 
   const authStore = useAuthStore();
   const { showForm } = storeToRefs(authStore)

@@ -9,6 +9,7 @@
     --main-bg-color-trsp: rgb(0 251 255 / 32%);
     --main-text-color: #2c3e50;
     --main-text-color-hover: rgb(0, 251, 255);
+    --main-modal-bg: #00000073;
     /* Inputs colors */
     --main-active-color: rgb(0, 251, 255);
     --main-active-color-trsp: rgb(0, 251, 255 / 30%);
@@ -29,7 +30,19 @@
     /* Stats card width */
     --stats-card-width: 300px;
     --body-min-width: 580px;
+    /* Select */
+    --select-opt-width: 145px;
 
+    /* FormKit overload*/
+    --fk-bg-submit: var(--main-bg-color);
+    --fk-color-primary: var(--main-bg-color);
+
+    /* Transition */
+    --transition-time: 100ms;
+}
+.formkit-wrapper{
+    max-width: 100%;
+    width: 100%;
 }
 
 body {
@@ -40,6 +53,39 @@ body {
     color: var(--main-text-color);
     margin:0;
     min-width: var(--body-min-width);
+    overflow: hidden;
+}
+
+.modal {
+    position: fixed;
+    height: 100vh;
+    background-color: var(--main-modal-bg);
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.floatingForm {
+    background-color: var(--main-bg-white);
+    border: 1px solid var(--main-active-color);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px lightblue;
+    padding:10px;
+}
+
+.clickableSection {
+    width: calc(100% - 0px);
+    border: 1px solid var(--main-bg-color);
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: var(--main-bg-color);
+    transition: var(--transition-time);
+}
+.clickableSection:hover {
+    border-color: var(--main-bg-color);
+    color: var(--main-text-color-light);
+    background-color: var(--main-bg-white);
 }
 
 .unselectable{
@@ -72,7 +118,7 @@ button {
     border-radius: 5px;
     padding: 5px 15px 5px 15px;
     cursor:pointer;
-    transition: 100ms
+    transition: var(--transition-time);
 }
 
 button:hover {

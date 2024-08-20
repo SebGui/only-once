@@ -9,11 +9,14 @@ const config = {
   emailTemplate : 'Hi Only-Once user, your new password is : $password',
   uris: {
     // Api calls
+    // Users related
     getUsers: baseApi + 'users',
     getUser: baseApi + 'users?userID=',
     getUserByName: baseApi + 'users?login=',
     getUserByEmail: baseApi + 'users?email=',
     updateUsers: baseApi + 'users/',//json-server PATCH only seems to work on category/id format
+    // Profile related
+    getUserProfile: baseApi + 'profiles/'
   },
   SideNav: [
     {id: 1, name: 'Option 1', icon: 'fingerprint'},

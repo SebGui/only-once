@@ -10,7 +10,7 @@
 <script setup lang="ts">
   //import useAuthStore from '@/stores/authStore';
   //import { onMounted, onUpdated } from 'vue';
-  import StatsList from '@/components/StatsList.vue';
+  import StatsList from '@/components/dashboard/StatsList.vue';
   
   //const authStore = useAuthStore()
 

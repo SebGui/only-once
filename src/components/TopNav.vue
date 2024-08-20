@@ -2,24 +2,12 @@
     <nav class="topNav">
       <router-link to="/" class="topNavLink">Dashboard</router-link> 
       <router-link to="/about" class="topNavLink">About</router-link>
+      <router-link :to="{name:'profile'}" class="topNavLink">Profile</router-link>
 
-      <!--<i class="material-icons statusIcon statusNotAvailable">circle</i>
-      <select name="status" id="status">
-        <option value="1" data-icon="@/assets/svgs/circle_green.svg">
-            Available
-        </option>
-        <option value="2" data-icon="src/assets/logo.png">
-            Watching/Idle
-        </option>
-        <option value="3">
-            Not available
-        </option>
-      </select>-->
-
+      <!-- Show placeholder while authstore is not defined or null -->
       <template v-if="authStore.user && authStore.user.Status != undefined">
         <SelectComp :options="options" :currentValue="authStore.user.Status"/>
       </template>
-      <!--{{ authStore.user }}-->
 
       <div @click="handleLogout">Logout</div>
     </nav>

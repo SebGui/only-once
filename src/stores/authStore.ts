@@ -6,6 +6,7 @@ import { defineStore } from 'pinia'
 // Types imports
 import User from '@/types/User'
 import LogType from '@/types/LogType'
+import Status from '@/types/Status'
 
 // Config import
 import conf from '@/../onceConfig'
@@ -18,7 +19,9 @@ import { VueCookies } from 'vue-cookies';
 
 // User API
 import usersApi from '@/composables/api/User'
-import Status from '@/types/Status'
+
+// Other stores auto load
+import useProfileStore from '@/stores/profileStore'
 
 // State type of the authentication store
 type State = {
@@ -44,6 +47,9 @@ const useAuthStore = defineStore('authStore', {
         // Getters related to user datas
         getStatus():Status {
             return (this.user != undefined) ? this.user.Status : 1
+        },
+        getProfileID():string {
+            return (this.user != undefined) ? this.user.profileID : ""
         }
     },
     actions: {
@@ -66,6 +72,13 @@ const useAuthStore = defineStore('authStore', {
                 this.cookies?.set('accessToken', idGenerator(conf.accessTokenLenght))
                 this.cookies?.set('userId', this.user.userID)
                 //Update lastLoggedIn
+                this.user.lastLoggedIn = new Date().getTime()
+                this.user.accessToken = this.cookies?.get('accessToken')
+                this.updateUser();
+
+                console.log("Set id in authStore");
+                const profileStore = useProfileStore();
+                profileStore.setProfileID(this.user.profileID)
                 return true
             } else {
                 this.setErrorText('The combinaison login/password doesn\'t match')
@@ -105,7 +118,8 @@ const useAuthStore = defineStore('authStore', {
                 createdAt: new Date().getTime(),
                 updatedAt: new Date().getTime(),
                 Status: 1,
-                profileID: idGenerator(conf.profileIdLength)
+                profileID: idGenerator(conf.profileIdLength),
+                accessToken: ""
             }
             await usersApi.addUser(newUser)
             this.showForm = 'login'
@@ -173,6 +187,9 @@ const useAuthStore = defineStore('authStore', {
         setSuccessText(text: string) {
             this.errorText = null
             this.successText = text
+        },
+        checkToken(): boolean {
+            return this.user?.accessToken === this.cookies?.get('accessToken')
         }
     }
 })

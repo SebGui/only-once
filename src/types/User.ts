@@ -12,6 +12,7 @@ interface User {
     updatedAt: number,
     Status: Status,
     profileID: string,
+    accessToken: string
 }
 
 export default User

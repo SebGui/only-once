@@ -1,10 +1,8 @@
 <template>
     <section>
         <TopNav />
-        <!-- Make nav component-->
 
         <router-view class="router-view"/>
-
     </section>
 </template>
 
@@ -17,8 +15,9 @@
         width: 100%;
     }
     .router-view {
-        height: 100vh;
-        overflow-y: scroll;
+        /*height: 100vh;*/
+        overflow-y: auto;
         max-height: calc(100vh - var(--topnav-height));
+        overflow-x: hidden;
     }
 </style>

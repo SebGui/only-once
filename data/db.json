@@ -1,19 +1,6 @@
 {
   "users": [
     {
-      "userID": "1",
-      "login": "fiz",
-      "password": "123",
-      "email": "sebastien.guibourdin@gmail.com",
-      "googleID": "",
-      "lastLoggedIn": 0,
-      "createdAt": 0,
-      "updatedAt": 0,
-      "Status": 1,
-      "profileID": 1,
-      "id": "5100"
-    },
-    {
       "id": "c8c1",
       "userID": "tub4Xj",
       "login": "cf5630d1974e53c275ccbafcb4b82e70",
@@ -46,11 +33,29 @@
       "password": "611aece50e5f742db42e4d4b260502d5",
       "email": "sebastien.guibourdin@gmail.com",
       "googleID": "",
-      "lastLoggedIn": 0,
+      "lastLoggedIn": 1724163638640,
       "createdAt": 1723803372552,
       "updatedAt": 1723803372552,
-      "Status": 3,
-      "profileID": "kj0N2KU"
+      "Status": 2,
+      "profileID": "kj0N2KU",
+      "accessToken": "EtKgfnukqiSlg0JFvynP9PZVCi0O1gYJT4hRL8ErYCaVaSbqbA1PCJ8vYhpZsoAf"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "kj0N2KU",
+      "summaryID": "1",
+      "firstName": "toto",
+      "lastName": "tata",
+      "phoneNumber": "aPhone",
+      "address": "an address",
+      "createdAt": 123456789,
+      "updatedAt": 123456789
+    }
+  ],
+  "summaries": [
+    {
+      "id": "1"
     }
   ]
 }

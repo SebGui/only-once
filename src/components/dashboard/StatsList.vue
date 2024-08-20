@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-  import SingleStat from '@/components/SingleStat.vue';
+  import SingleStat from '@/components/dashboard/SingleStat.vue';
   import config from '@/../onceConfig';
 
   // [Later] : Build actual stats from backend with ascociated Pinia Store
