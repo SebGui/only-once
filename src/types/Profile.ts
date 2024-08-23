@@ -5,6 +5,7 @@ type Profile = {
     profilePicture: string
     phoneNumber: string
     address:string
+    summaryID: string
     createdAt: number
     updatedAt: number
 }

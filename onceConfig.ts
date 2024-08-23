@@ -16,7 +16,13 @@ const config = {
     getUserByEmail: baseApi + 'users?email=',
     updateUsers: baseApi + 'users/',//json-server PATCH only seems to work on category/id format
     // Profile related
-    getUserProfile: baseApi + 'profiles/'
+    getUserProfile: baseApi + 'profiles/',
+    updateUserProfile: baseApi + 'profiles/',
+    // Summary related
+    getUserSummary: baseApi + 'summaries/',
+    addUserSummary: baseApi + 'summaries',
+    updateUserSummary:  baseApi + 'summaries/',
+    deleteUserSummary:  baseApi + 'summaries/',
   },
   SideNav: [
     {id: 1, name: 'Option 1', icon: 'fingerprint'},
@@ -31,6 +37,19 @@ const config = {
     {id: 3, icon: 'legend_toggle', desc: 'How often you appeared in searches', amount:56},
     {id: 4, icon: 'score', desc: 'Another stat description', amount:28},
     {id: 5, icon: 'download', desc: 'How often you account has been requested', amount:3}
+  ],
+  companySize : [
+    { label: 'Small (1 to 9)', value: '1'},
+    { label: 'Medium (10 to 29)', value: '2'},
+    { label: 'Large (30 to 49)', value: '3'},
+    { label: 'Very large (50+)', value: '4' }
+  ],
+  companyType: [
+    { label: 'Prefer not to say', value: '1'},
+    { label: 'Any type', value: '2'},
+    { label: 'Start-up', value: '3'},
+    { label: 'Scale-up', value: '4' },
+    { label: 'Large', value: '5' }
   ]
   
 }

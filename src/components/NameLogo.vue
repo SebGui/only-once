@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="unselectable">
         <i class="material-icons">swipe_right</i>
         <span>{{ name }}</span>
     </div>

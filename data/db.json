@@ -44,7 +44,7 @@
   "profiles": [
     {
       "id": "kj0N2KU",
-      "summaryID": "1",
+      "summaryID": "iOb8wJZS",
       "firstName": "toto",
       "lastName": "tata",
       "phoneNumber": "aPhone",
@@ -55,7 +55,13 @@
   ],
   "summaries": [
     {
-      "id": "1"
+      "id": "iOb8wJZS",
+      "summary": "hgfdhfg",
+      "salary": "600001",
+      "companyType": "4",
+      "companySize": "3",
+      "createdAt": 1724419882296,
+      "updatedAt": 1724419882296
     }
   ]
 }

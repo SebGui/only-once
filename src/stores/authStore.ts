@@ -77,8 +77,9 @@ const useAuthStore = defineStore('authStore', {
                 this.updateUser();
 
                 console.log("Set id in authStore");
-                const profileStore = useProfileStore();
-                profileStore.setProfileID(this.user.profileID)
+                this.loadProfileDependencies();
+                /*const profileStore = useProfileStore();
+                profileStore.setProfileID(this.user.profileID)*/
                 return true
             } else {
                 this.setErrorText('The combinaison login/password doesn\'t match')
@@ -150,14 +151,21 @@ const useAuthStore = defineStore('authStore', {
 
             return userExists
         },
-        checkLogStatus(): void {
+        async checkLogStatus(): Promise<void> {
             if (this.cookies && this.cookies.get('accessToken') === null) {
                 this.isLoggedIn = false
               } else {
                 this.isLoggedIn = true
                 if (this.user === null) {
-                    this.setUser()
+                    await this.setUser()
+                    //get profile (in that get profile, get summery and under profile)
                 }
+                console.log("Before profile set");
+                this.loadProfileDependencies();
+                /*if (this.user != null) {
+                    const profileStore = useProfileStore();
+                    profileStore.setProfileID(this.user.profileID)
+                }*/
               }
         },
         // Setters
@@ -190,6 +198,13 @@ const useAuthStore = defineStore('authStore', {
         },
         checkToken(): boolean {
             return this.user?.accessToken === this.cookies?.get('accessToken')
+        },
+        loadProfileDependencies(): void {
+            // Load syb profile parts on login and check if logged (refresh)
+            if (this.user != null) {
+                const profileStore = useProfileStore();
+                profileStore.setProfileID(this.user.profileID)
+            }
         }
     }
 })

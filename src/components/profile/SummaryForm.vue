@@ -8,13 +8,13 @@
                 name="summary"
                 label="Your summary"
                 placeholder="Remember to write in complete summary."
-                :help="`${summary ? summary.length : 0} / 500`"
+                :help="`${summaryText ? summaryText.length : 0} / 500`"
                 validation="length:0,500"
                 validation-visibility="live"
                 :validation-messages="{
                   length: 'Summary cannot be more than 500 characters.',
                 }"
-                v-model="summary"
+                v-model="summaryText"
             />
 
             <!-- Salary: Range -->
@@ -45,12 +45,7 @@
               label="What size of company are you looking for?"
               name="companySize"
               placeholder="Select a company size"
-              :options="[
-                { label: 'Small (1 to 9)', value: '1'},
-                { label: 'Medium (10 to 29)', value: '2'},
-                { label: 'Large (30 to 49)', value: '3'},
-                { label: 'Very large (50+)', value: '4' }
-              ]"
+              :options="config.companySize"
               help="Don’t worry, you can’t get this one wrong."
               v-model="companySize"
             />
@@ -62,13 +57,7 @@
               label="What type of company are you looking for?"
               name="companyType"
               placeholder="Select a company type"
-              :options="[
-                { label: 'Prefer not to say', value: '1'},
-                { label: 'Any type', value: '2'},
-                { label: 'Start-up', value: '3'},
-                { label: 'Scale-up', value: '4' },
-                { label: 'Large', value: '5' }
-              ]"
+              :options="config.companyType"
               help="Don’t worry, you can’t get this one wrong."
               v-model="companyType"
             />
@@ -78,20 +67,67 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, defineEmits } from 'vue'
+  import { ref, defineEmits, defineProps } from 'vue'
   import { FormKit } from '@formkit/vue';
+  import useSummaryStore from '@/stores/summaryStore';
+  import useProfileStore from '@/stores/profileStore';
+  import idGenerator from '@/composables/utils/idGenerator';
+  import Summary from '@/types/Summary';
+  import config from '@/../onceConfig';
+import { storeToRefs } from 'pinia';
 
   // Summary: textarea, salaryRange: string, expectedCompanyType: number, expectedCompanySize: number
 
-  const summary = ref<string>('')
+  const summaryStore = useSummaryStore();
+  const profileStore = useProfileStore();
+
+  const {summary} = storeToRefs(summaryStore)
+
+  const props = defineProps({'isEdit' : {required : true}})
+
+  // If props "edit" exists, load summary as those refs
+  const summaryText = ref<string>('')
   const salary = ref<string>('60000')
   const companySize = ref<string>('')
   const companyType = ref<string>('')
+  if (props.isEdit === true && summary.value) {
+    summaryText.value = summary.value.summary
+    salary.value = summary.value.salary
+    companySize.value = summary.value.companySize
+    companyType.value = summary.value.companyType
+  }
 
   const emit = defineEmits(['closeModal'])
 
-  const handleSubmit = (): void => {
-    console.log('form submitted');
+  const handleSubmit = async (): Promise<void> => {
+    if (summary.value !== null && props.isEdit === true) {
+      summary.value.summary = summaryText.value
+      summary.value.salary = salary.value
+      summary.value.companySize = companySize.value;
+      summary.value.companyType = companyType.value
+
+      await summaryStore.updateSummary()
+      emit('closeModal')
+      return
+    }
+    console.log("add summaryu");
+    // Set summary to add to DB
+    const summaryID: string = idGenerator(8)
+    const newSummary: Summary = {
+      id: summaryID,
+      summary: summaryText.value,
+      salary: salary.value,
+      companyType: companyType.value,
+      companySize: companySize.value,
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime()
+    }
+
+    // Set summary to profile on add summary to DB
+    if (await summaryStore.addSummary(newSummary)) {
+      await profileStore.setSummaryID(newSummary.id)
+      await profileStore.updateProfile()
+    }
 
     //Make a view for data succesfully saved
     emit('closeModal')
