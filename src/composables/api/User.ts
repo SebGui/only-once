@@ -32,7 +32,6 @@ const getUserByLogin = async (login: string): Promise<User[]> => {
 }
 
 const getUserByEmail = async (email: string): Promise<User[]> => {
-    //console.log(requestMaker(conf.uris.getUserByName + email));
     return rm.prelogRequestMaker(conf.uris.getUserByEmail + email);
 }
 

@@ -2,8 +2,9 @@
     <div class="summaryBlock">
         <h3>Summary</h3>
 
-        <section class="viewSummary borders profileData" v-if="summary?.id">
-            <!-- make edit and delete summary -->
+        <section class="viewSummary borders profileData" v-if="summary?.id"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
+            <ActionsComp @deleteClicked="handleDelete" @editClicked="handleEdit"/> <!-- v-if="showActions === true" -->
+
             <p>Your summary :</p>
             <span>{{ summary.summary }}</span>
 
@@ -15,12 +16,8 @@
 
             <p>Prefered company Type :</p>
             <span>{{ config.companyType[parseInt(summary.companyType)-1].label }}</span>
-            <!-- show summary-->
 
-            <div class="actions"> <!-- Make proper icons -->
-              <button @click="editSummary">Edit</button>
-              <button @click="deleteSummary">Delete</button>
-            </div>
+            <ValidCancelBtnsComp :texts="{confirm:'Submit', cancel:'Cancel'}" @cancelClicked="handleCancel" @confirmClicked="handleConfirm"/>
         </section>
         <section @click="toggleCreateSummary" class="clickableSection createSummary" v-else>
             <!--show create summary form-->
@@ -34,12 +31,21 @@
   import useSummaryStore from '@/stores/summaryStore';
   import { storeToRefs } from 'pinia';
   import config from '@/../onceConfig'
+  import ValidCancelBtnsComp from '../subcomponents/ValidCancelBtnsComp.vue';
+  import ActionsComp from '../subcomponents/ActionsComp.vue';
 
+  // Emit custom events setup
   const emit = defineEmits(['addSummary', 'editSummary', 'deleteSummary'])
+
+  // Store setup
   const summaryStore = useSummaryStore();
   const {summary} = storeToRefs(summaryStore)
-  const showCreateSummary = ref<boolean>(false)
 
+  // Conditionnal rendering
+  const showCreateSummary = ref<boolean>(false)
+  const showActions = ref<boolean>(false)
+
+  // Logic functions
   const toggleCreateSummary = (): void => {
     showCreateSummary.value = !showCreateSummary.value
     emit('addSummary')
@@ -47,12 +53,27 @@
 
   const editSummary = () => {
     emit('editSummary')
-    //console.log("edit summary");
   }
   const deleteSummary = async () => {
-    //console.log("delete summary");
     await summaryStore.deleteSummary()
     emit('deleteSummary')
+  }
+
+  const handleDelete = () => {
+    console.log("Delete");
+    deleteSummary()
+  }
+  const handleEdit = () => {
+    console.log("Edit");
+    editSummary()
+  }
+
+  /* Testing */
+  const handleConfirm = () => {
+    console.log("confirmed");
+  }
+  const handleCancel = () => {
+    console.log("Canceled");
   }
 </script>
 

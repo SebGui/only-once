@@ -1,7 +1,7 @@
 <template>
     <nav class="topNav">
-      <router-link to="/" class="topNavLink">Dashboard</router-link> 
-      <router-link to="/about" class="topNavLink">About</router-link>
+      <router-link :to="{name:'dashboard'}" class="topNavLink">Dashboard</router-link> 
+      <router-link :to="{name:'about'}" class="topNavLink">About</router-link>
       <router-link :to="{name:'profile'}" class="topNavLink">Profile</router-link>
 
       <!-- Show placeholder while authstore is not defined or null -->

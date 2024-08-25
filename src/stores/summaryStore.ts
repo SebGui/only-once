@@ -12,13 +12,7 @@ const useSummaryStore = defineStore('summaryStore', {
         summary: null,
         summaryID: ''
     }),
-    getters: {
-        /*getSummaryObj(): Summary {
-            if (this.summary !== null) {
-                return this.summary
-            }
-        }*/
-    },
+    getters: {},
     actions: {
         async addSummary(summary: Summary): Promise<boolean> {
             const isSuccess:boolean = await summaryApi.addUserSummary(summary)
@@ -39,9 +33,6 @@ const useSummaryStore = defineStore('summaryStore', {
             this.summary = null
         },
         async updateSummary(): Promise<void>{
-            /*await summaryApi.deleteUserSummary(this.summaryID)
-            this.summaryID = ''
-            this.summary = null*/
             if (this.summary != null) {
                 await summaryApi.updateUserSummary(this.summary);
             }

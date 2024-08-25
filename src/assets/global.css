@@ -5,6 +5,7 @@
     --main-bg-color: rgb(0, 251, 255);
     --main-text-color-light: rgb(0, 251, 255);
     --main-text-color-white: white;
+    --main-text-color-gray: lightgray;
     --main-bg-color-darken: rgb(0, 226, 230);
     --main-bg-color-trsp: rgb(0 251 255 / 32%);
     --main-text-color: #2c3e50;
@@ -21,6 +22,9 @@
     /* Status colors */
     --main-error-color: rgb(255, 40, 40);
     --main-success-color: rgb(40, 244, 40);
+    /* Status colors */
+    --main-cancel-color: rgb(255, 76, 76);
+    --main-validate-color: rgb(26, 158, 0);
     /* Sidebar size */
     --sidebar-width: 15rem;
     /* TopNav */

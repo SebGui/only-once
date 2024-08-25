@@ -54,10 +54,9 @@ const useAuthStore = defineStore('authStore', {
     },
     actions: {
         async login(login: string, password: string): Promise<boolean> {
-            /*const res = await fetch(conf.uris.getUsers)
-            const data: User[] = await res.json()*/
             const data: User[] = await usersApi.getUsers()
 
+            // Check credentials
             const user = data.filter((cUser) => {
                 if (cUser.login === login &&
                     cUser.password === password) {
@@ -65,21 +64,18 @@ const useAuthStore = defineStore('authStore', {
                 }
             })
 
+            // If user exists, set our store object, tokens and update datas
             if (user.length > 0) {
                 this.user = user[0]
                 this.errorText = null
                 this.isLoggedIn = true
                 this.cookies?.set('accessToken', idGenerator(conf.accessTokenLenght))
                 this.cookies?.set('userId', this.user.userID)
-                //Update lastLoggedIn
                 this.user.lastLoggedIn = new Date().getTime()
                 this.user.accessToken = this.cookies?.get('accessToken')
                 this.updateUser();
 
-                console.log("Set id in authStore");
                 this.loadProfileDependencies();
-                /*const profileStore = useProfileStore();
-                profileStore.setProfileID(this.user.profileID)*/
                 return true
             } else {
                 this.setErrorText('The combinaison login/password doesn\'t match')
@@ -87,15 +83,13 @@ const useAuthStore = defineStore('authStore', {
             }
         },
         logout(): void {
-            //console.log("Logout function");
+            // Logout function
             this.cookies?.remove('accessToken')
             this.cookies?.remove('userId')
             this.isLoggedIn = false
 
         },
         async register(login: string, password: string, email: string): Promise<boolean> {
-            console.log('REgister function');
-
             // Check if user exists
             let userExists = false
             userExists = await usersApi.getUserByLogin(login).then((res) => {
@@ -158,18 +152,12 @@ const useAuthStore = defineStore('authStore', {
                 this.isLoggedIn = true
                 if (this.user === null) {
                     await this.setUser()
-                    //get profile (in that get profile, get summery and under profile)
                 }
-                console.log("Before profile set");
                 this.loadProfileDependencies();
-                /*if (this.user != null) {
-                    const profileStore = useProfileStore();
-                    profileStore.setProfileID(this.user.profileID)
-                }*/
               }
         },
         // Setters
-        async updateUser(/*userObj: User*/): Promise<void> {
+        async updateUser(): Promise<void> {
             if (this.user) {
                 await usersApi.updateUser(this.user)
             }
