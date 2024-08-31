@@ -6,6 +6,7 @@ type Profile = {
     phoneNumber: string
     address:string
     summaryID: string
+    experienceIDs: string[]
     createdAt: number
     updatedAt: number
 }

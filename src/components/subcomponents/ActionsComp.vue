@@ -15,6 +15,7 @@
 <script setup lang="ts">
     import {defineEmits, ref} from 'vue'
     import ValidCancelBtnsComp from '@/components/subcomponents/ValidCancelBtnsComp.vue'
+    import config from '@/../onceConfig';
 
     const emit = defineEmits(['deleteClicked', 'editClicked'])
 
@@ -27,12 +28,12 @@
         showModal.value = true
     }
     const handleDelete = ():void => {
-        console.log("in handleDelete");
+        if (config.devMode === true) {console.log('in handle Delete');}
         showModal.value = false;
         emit('deleteClicked')// Do this on click of confirm
     }
     const handleEdit = ():void => {
-        console.log("emit edit");
+        if (config.devMode === true) {console.log('emit edit');}
         emit('editClicked')
     }
 </script>

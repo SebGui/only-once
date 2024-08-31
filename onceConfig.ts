@@ -1,6 +1,7 @@
 const baseApi = 'http://localhost:3000/';
 const config = {
   title: 'Only Once',
+  devMode : true,// For console.logs
   accessTokenLenght: 64,
   accessTokenExpires : '7d',
   userIdLength: 6,
@@ -23,6 +24,12 @@ const config = {
     addUserSummary: baseApi + 'summaries',
     updateUserSummary:  baseApi + 'summaries/',
     deleteUserSummary:  baseApi + 'summaries/',
+    // Experience related
+    getUserExperiences : baseApi + 'experiences/',
+    getUserExperience: baseApi + 'experiences/',
+    addUserExperience: baseApi + 'experiences',
+    updateUserExperience:  baseApi + 'experiences/',
+    deleteUserExperience:  baseApi + 'experiences/',
   },
   SideNav: [
     {id: 1, name: 'Option 1', icon: 'fingerprint'},

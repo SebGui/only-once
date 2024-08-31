@@ -33,18 +33,21 @@
       "password": "611aece50e5f742db42e4d4b260502d5",
       "email": "sebastien.guibourdin@gmail.com",
       "googleID": "",
-      "lastLoggedIn": 1724163638640,
+      "lastLoggedIn": 1725016705860,
       "createdAt": 1723803372552,
       "updatedAt": 1723803372552,
       "Status": 2,
       "profileID": "kj0N2KU",
-      "accessToken": "EtKgfnukqiSlg0JFvynP9PZVCi0O1gYJT4hRL8ErYCaVaSbqbA1PCJ8vYhpZsoAf"
+      "accessToken": "onsUybKZj0vXINwg2towuibDrUtqdfAX1CFytiJDhF9cJwSr5KId39NZqevoI4Ao"
     }
   ],
   "profiles": [
     {
       "id": "kj0N2KU",
-      "summaryID": "miZsBKjo",
+      "summaryID": "EuL6gRHd",
+      "experienceIDs": [
+        "1"
+      ],
       "firstName": "toto",
       "lastName": "tata",
       "phoneNumber": "aPhone",
@@ -55,13 +58,35 @@
   ],
   "summaries": [
     {
-      "id": "miZsBKjo",
-      "summary": "gfsdgfd",
-      "salary": "60004",
-      "companyType": "3",
-      "companySize": "3",
-      "createdAt": 1724587915469,
-      "updatedAt": 1724587915469
+      "id": "EuL6gRHd",
+      "summary": "A quick summary about myself...",
+      "salary": "82908",
+      "companyType": "4",
+      "companySize": "2",
+      "createdAt": 1725101208114,
+      "updatedAt": 1725101208114
+    }
+  ],
+  "experiences": [
+    {
+      "id": "1",
+      "expName": "Lead dev",
+      "companyName": "Grata",
+      "expDesc": "in charge of various thing for a company that was realy worth it ...",
+      "startedOn": 0,
+      "endedOn" : 0,
+      "createdAt": 1725101208114,
+      "updatedAt": 1725101208114
+    },
+    {
+      "id": "2",
+      "expName": "dev",
+      "companyName": "Cerbex",
+      "expDesc": "a desc",
+      "startedOn": 0,
+      "endedOn" : 0,
+      "createdAt": 1725101208114,
+      "updatedAt": 1725101208114
     }
   ]
 }

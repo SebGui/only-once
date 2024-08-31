@@ -5,6 +5,7 @@
             <!-- Summary block component -->
             <SummaryComp @addSummary="showSummaryForm" @editSummary="editSummary" @deleteSummary="deleteSummary"/>
 
+            <ExperienceComp @addExperience="showExperienceForm" @editExperience="editExperience" @deleteExperience="deleteExperience"/>
             <!-- Experiences block component -->
             <!-- Language block component -->
             <!-- Skills block component -->
@@ -24,6 +25,7 @@
 <script setup lang="ts">
   import SummaryComp from '@/components/profile/SummaryComp.vue';
   import SummaryForm from '@/components/profile/SummaryForm.vue';
+  import ExperienceComp from '@/components/profile/ExperienceComp.vue';
   import useProfileStore from '@/stores/profileStore';
   import { ref } from 'vue'
 
@@ -45,11 +47,13 @@
   // Summary Logic
   const showSummary = ref<boolean>(false)
   const showSummaryForm = (): void => {
+    showExperience.value = false;
     showSummary.value = true
     toggleModal()
   }
   const editSummary = () => {
     isEdit.value = true
+    showExperience.value = false;
     showSummary.value = true
     toggleModal()
   }
@@ -59,17 +63,39 @@
     //await profileStore.updateProfile()
   }
 
+  // Experience Logic
+  const showExperience = ref<boolean>(false)
+  const showExperienceForm = (): void => {
+    console.log('showExperienceForm');
+    showSummary.value = false
+    showExperience.value = true;
+    toggleModal()
+  }
+  const editExperience = () => {
+    console.log('editExperience');
+    isEdit.value = true
+    showSummary.value = false
+    showExperience.value = true
+    toggleModal()
+  }
+  const deleteExperience = async (id: string) => {
+    console.log(`deleteExperience with id ${id}`);
+    await profileStore.deleteExperienceID(id)
+  }
+
+
   // Global reseter
   const resetFormVisibility = () => {
     showSummary.value = false
+    showExperience.value = false
   }
-
 </script>
 
 <style scoped>
     .profileContent{
         padding:10px;
-        display:flex;
+        display: flex;
+        flex-direction: column;
     }
     .toto {
         width:10px;

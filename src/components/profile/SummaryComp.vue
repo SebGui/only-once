@@ -17,7 +17,6 @@
             <p>Prefered company Type :</p>
             <span>{{ config.companyType[parseInt(summary.companyType)-1].label }}</span>
 
-            <ValidCancelBtnsComp :texts="{confirm:'Submit', cancel:'Cancel'}" @cancelClicked="handleCancel" @confirmClicked="handleConfirm"/>
         </section>
         <section @click="toggleCreateSummary" class="clickableSection createSummary" v-else>
             <!--show create summary form-->
@@ -30,8 +29,7 @@
   import { ref, defineEmits } from 'vue'
   import useSummaryStore from '@/stores/summaryStore';
   import { storeToRefs } from 'pinia';
-  import config from '@/../onceConfig'
-  import ValidCancelBtnsComp from '../subcomponents/ValidCancelBtnsComp.vue';
+  import config from '@/../onceConfig';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
 
   // Emit custom events setup
@@ -64,6 +62,7 @@
     deleteSummary()
   }
   const handleEdit = () => {
+    if (config.devMode === true) {console.log('Edit');}
     console.log("Edit");
     editSummary()
   }

@@ -1,5 +1,8 @@
 <template>
     <div class="floatingForm">
+      <h1 v-if="props.isEdit === true">Edit summary</h1>
+      <h1 v-else>Create summary</h1>
+
         <FormKit type="form" id="myForm" @submit="handleSubmit">
 
             <!-- Summary: Textarea -->
@@ -8,7 +11,7 @@
                 name="summary"
                 label="Your summary"
                 placeholder="Remember to write in complete summary."
-                :help="`${summaryText ? summaryText.length : 0} / 500`"
+                :help="`Maximum : ${summaryText ? summaryText.length : 0} / 500`"
                 validation="length:0,500"
                 validation-visibility="live"
                 :validation-messages="{
@@ -25,12 +28,12 @@
                  label="Salary"
                  min="0"
                  max="500000"
-                 help="Select your Expected salary."
+                 outer-class="formNoBottomBorder"
                />
                <FormKit
                  class="toto"
                  type="number"
-                 help="Adjust your expected salary"
+                 help="Select your Expected salary."
                  label=""
                  name="salary"
                  :value="salary"
@@ -49,7 +52,6 @@
               help="Don’t worry, you can’t get this one wrong."
               v-model="companySize"
             />
-            {{ companySize }}
 
             <!-- companyType : dropdown -->
             <FormKit
@@ -60,21 +62,23 @@
               :options="config.companyType"
               help="Don’t worry, you can’t get this one wrong."
               v-model="companyType"
+              outer-class="formNoBottomBorder"
             />
-            {{ companyType }}
         </FormKit>
     </div>
 </template>
 
 <script setup lang="ts">
   import { ref, defineEmits, defineProps } from 'vue'
+  import { storeToRefs } from 'pinia';
   import { FormKit } from '@formkit/vue';
+
+  // Stores import
   import useSummaryStore from '@/stores/summaryStore';
   import useProfileStore from '@/stores/profileStore';
   import idGenerator from '@/composables/utils/idGenerator';
   import Summary from '@/types/Summary';
   import config from '@/../onceConfig';
-import { storeToRefs } from 'pinia';
 
   // Summary: textarea, salaryRange: string, expectedCompanyType: number, expectedCompanySize: number
 
@@ -136,18 +140,7 @@ import { storeToRefs } from 'pinia';
 </script>
 
 <style scoped>
-    div {
-        background-color: var(--main-bg-white);
-        margin: auto auto;
-        position: relative;
-        top: 5%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-        width: 80%;
-    }
     #myForm {
-        width:600px;
+        width:60%;
     }
 </style>

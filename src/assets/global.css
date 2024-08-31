@@ -3,6 +3,7 @@
     --main-bg-clear: rgb(211, 211, 211);
     --main-bg-white: white;
     --main-bg-color: rgb(0, 251, 255);
+    --main-bg-color-trsp: #00fbff5c;
     --main-text-color-light: rgb(0, 251, 255);
     --main-text-color-white: white;
     --main-text-color-gray: lightgray;
@@ -41,13 +42,47 @@
     /* FormKit overload*/
     --fk-bg-submit: var(--main-bg-color);
     --fk-color-primary: var(--main-bg-color);
+    --form-label-color: rgb(99 176 178);
 
     /* Transition */
     --transition-time: 100ms;
 }
+
+/* Formkit overload */
 .formkit-wrapper{
     max-width: 100%;
     width: 100%;
+}
+.formkit-outer {
+    margin: 15px 5px 30px 5px;
+    border-bottom: 1px solid var(--main-bg-color-trsp);
+    padding-bottom: 20px;
+}
+.formNoBottomBorder {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.formkit-actions div { /* Submit button */
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.formkit-label {
+    font-size: 18px;
+    color: var(--form-label-color);
+}
+.floatingForm {
+    background-color: var(--main-bg-white);
+    margin: auto auto;
+    position: relative;
+    top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 80%;
+}
+.floatingForm h1 {
+    font-size: 26px;
 }
 
 body {
