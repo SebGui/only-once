@@ -8,14 +8,18 @@
 <script setup lang="ts">
     import {defineProps, defineEmits} from 'vue'
 
+    // Prop init for text elements
     defineProps({
         texts: {
             required: true,
             type: Object
         }
     })
+
+    // Emit definition
     const emit = defineEmits(['confirmClicked', 'cancelClicked'])
 
+    // Button Handlers
     const handleValid = (): void => {
         emit('confirmClicked')
     }   

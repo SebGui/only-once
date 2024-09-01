@@ -5,18 +5,18 @@
             <!-- Summary block component -->
             <SummaryComp @addSummary="showSummaryForm" @editSummary="editSummary" @deleteSummary="deleteSummary"/>
 
-            <ExperienceComp @addExperience="showExperienceForm" @editExperience="editExperience" @deleteExperience="deleteExperience"/>
             <!-- Experiences block component -->
+            <ExperienceComp @addExperience="showExperienceForm" @editExperience="editExperience" @deleteExperience="deleteExperience"/>
+
+
             <!-- Language block component -->
             <!-- Skills block component -->
             <!-- Education block component -->
 
-
-            
-            
             <div v-if="showModal === true" class="modal" @click.self="closeModal">
                 <!-- Show forms in here ? -->
                 <SummaryForm v-if="showSummary === true" :isEdit="isEdit" @closeModal="closeModal"/>
+                <ExperienceForm v-if="showExperience === true" :isEdit="isEdit" :expID="expIdToEdit" @closeModal="closeModal"/>
             </div>
         </section>
     </div>
@@ -26,65 +26,62 @@
   import SummaryComp from '@/components/profile/SummaryComp.vue';
   import SummaryForm from '@/components/profile/SummaryForm.vue';
   import ExperienceComp from '@/components/profile/ExperienceComp.vue';
+  import ExperienceForm from '@/components/profile/ExperienceForm.vue';
   import useProfileStore from '@/stores/profileStore';
   import { ref } from 'vue'
 
   const profileStore = useProfileStore()
 
   // Modal logic
-  const isEdit = ref<boolean>(false)
+  const isEdit = ref<boolean>(false) // Control edit mode
+  const expIdToEdit = ref<string>(''); // Bears the concerned element id
 
   const showModal = ref<boolean>(false)
   const toggleModal = () => {
-    showModal.value = !showModal.value
+    showModal.value = !showModal.value // Reveals the modal vie
   }
   const closeModal = (): void => {
-    showModal.value = false
-    resetFormVisibility()
-    isEdit.value = false
+    resetFormVisibility() // Hide all forms
+    isEdit.value = false // Set edit to false
   }
 
   // Summary Logic
   const showSummary = ref<boolean>(false)
   const showSummaryForm = (): void => {
-    showExperience.value = false;
-    showSummary.value = true
-    toggleModal()
+    resetFormVisibility() // Hide all forms
+    showSummary.value = true // Show concerned form
+    toggleModal() // Reveal modal
   }
   const editSummary = () => {
-    isEdit.value = true
-    showExperience.value = false;
-    showSummary.value = true
-    toggleModal()
+    isEdit.value = true // Set edit mode
+    resetFormVisibility() // Hide all forms
+    showSummary.value = true // Show concerned form
+    toggleModal() // Reveal modal
   }
   const deleteSummary = async () => {
-    // set summaryID in profile to ''
     await profileStore.setSummaryID('')
-    //await profileStore.updateProfile()
   }
 
   // Experience Logic
   const showExperience = ref<boolean>(false)
   const showExperienceForm = (): void => {
-    console.log('showExperienceForm');
-    showSummary.value = false
-    showExperience.value = true;
-    toggleModal()
+    resetFormVisibility() // Hide all forms
+    showExperience.value = true // Show concerned form
+    toggleModal() // Reveal modal
   }
-  const editExperience = () => {
-    console.log('editExperience');
-    isEdit.value = true
-    showSummary.value = false
-    showExperience.value = true
-    toggleModal()
+  const editExperience = (id:string) => {
+    isEdit.value = true // Set edit mode
+    expIdToEdit.value = id // Reference the id to be loaded
+    resetFormVisibility() // Hide all forms
+    showExperience.value = true // Show concerned form
+    toggleModal() // Reveal modal
   }
   const deleteExperience = async (id: string) => {
-    console.log(`deleteExperience with id ${id}`);
     await profileStore.deleteExperienceID(id)
   }
 
 
-  // Global reseter
+  // Global modal reseter
   const resetFormVisibility = () => {
     showSummary.value = false
     showExperience.value = false

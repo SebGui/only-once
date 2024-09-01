@@ -13,12 +13,14 @@ const useExperienceStore = defineStore('experienceStore', {
         experiencesIDs: []
     }),
     getters : {
-
     },
     actions: {
         async addExperience(experience: Experience): Promise<boolean> {
+            // Update DB reference
             const isSuccess:boolean = await experienceApi.addUserExperience(experience)
-            this.experiencesIDs.push(experience.id)//Update profile id's
+
+            // Update local store reference
+            this.experiences.push(experience)
             return isSuccess
         },
         async getExperience(id:string): Promise<void> {
@@ -33,6 +35,7 @@ const useExperienceStore = defineStore('experienceStore', {
                     .then(async (res) => {
                         // For some reason multiple id search doesn't work on json-server
                         // So we have to get all then filter the result
+                        // [Other way] : could bind userID to/in experience to retieve related experiences
 
                         // Set our experience store obj
                         this.experiences = res.filter((item) => {
@@ -42,11 +45,6 @@ const useExperienceStore = defineStore('experienceStore', {
                                 }
                             }
                         })
-
-                        // Set the list of our experience IDs
-                        for (let i = 0;i < this.experiences.length;i++) {
-                            this.experiencesIDs.push(res[i].id)//Update profile id's
-                        }
                     })
         },
         async setExperience(experienceId: string): Promise<void> {
@@ -56,8 +54,10 @@ const useExperienceStore = defineStore('experienceStore', {
             this.experiencesIDs = experienceIDs//Update profile id's
         },
         async deleteExperience(id:string): Promise<void>{
+            // Update DB reference
             await experienceApi.deleteUserExperience(id)
 
+            // Update local store reference
             const index = this.experiencesIDs.indexOf(id);
             if (index > -1) {
                 this.experiencesIDs.splice(index, 1);//Update profile id's
@@ -71,8 +71,25 @@ const useExperienceStore = defineStore('experienceStore', {
         },
         async updateExperience(experience: Experience): Promise<void>{
             if (experience.id != null) {
+                // Update DB reference
                 await experienceApi.updateUserExperience(experience);
+
+                // Update local reference
+                for (let i = 0; i < this.experiences.length;i++) {
+                    if (this.experiences[i].id === experience.id) {
+                        this.experiences[i] = experience
+                        return
+                    }
+                }
             }
+        },
+
+        getExperienceWithId(id: string): Experience {
+            return this.experiences.filter((item) => {
+                if (item.id === id)
+                    return true
+                return false
+            })[0]
         }
     }
 })

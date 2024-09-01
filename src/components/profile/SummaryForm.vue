@@ -79,21 +79,26 @@
   import idGenerator from '@/composables/utils/idGenerator';
   import Summary from '@/types/Summary';
   import config from '@/../onceConfig';
+  import myLog from '@/composables/utils/myLog';
 
-  // Summary: textarea, salaryRange: string, expectedCompanyType: number, expectedCompanySize: number
-
+  // Stores init
   const summaryStore = useSummaryStore();
   const profileStore = useProfileStore();
 
+  // Summary ref
   const {summary} = storeToRefs(summaryStore)
 
+  // Prop init
   const props = defineProps({'isEdit' : {required : true}})
 
-  // If props "edit" exists, load summary as those refs
+  // Default refs
+  // Could add default values to OnceConfig here
   const summaryText = ref<string>('')
   const salary = ref<string>('60000')
   const companySize = ref<string>('')
   const companyType = ref<string>('')
+
+  // If props "edit" exists, load summary as those refs
   if (props.isEdit === true && summary.value) {
     summaryText.value = summary.value.summary
     salary.value = summary.value.salary
@@ -101,9 +106,11 @@
     companyType.value = summary.value.companyType
   }
 
+  // Emit definition
   const emit = defineEmits(['closeModal'])
 
   const handleSubmit = async (): Promise<void> => {
+    // Submit as edit mode
     if (summary.value !== null && props.isEdit === true) {
       summary.value.summary = summaryText.value
       summary.value.salary = salary.value
@@ -114,11 +121,12 @@
       emit('closeModal')
       return
     }
-    console.log("add summaryu");
-    // Set summary to add to DB
-    const summaryID: string = idGenerator(8)
+
+    // Submit as add mode
+
+    // New Summary object init
     const newSummary: Summary = {
-      id: summaryID,
+      id: idGenerator(8),
       summary: summaryText.value,
       salary: salary.value,
       companyType: companyType.value,
@@ -127,7 +135,7 @@
       updatedAt: new Date().getTime()
     }
 
-    // Set summary to profile on add summary to DB
+    // Set summary to profile on add summary to DB + update local store summary ref
     if (await summaryStore.addSummary(newSummary)) {
       await profileStore.setSummaryID(newSummary.id)
       await profileStore.updateProfile()

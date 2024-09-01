@@ -53,6 +53,7 @@ const useAuthStore = defineStore('authStore', {
         }
     },
     actions: {
+        // Login flow
         async login(login: string, password: string): Promise<boolean> {
             const data: User[] = await usersApi.getUsers()
 
@@ -66,6 +67,7 @@ const useAuthStore = defineStore('authStore', {
 
             // If user exists, set our store object, tokens and update datas
             if (user.length > 0) {
+                // User related updates, user Obj, loggedIn status, cookies management ...
                 this.user = user[0]
                 this.errorText = null
                 this.isLoggedIn = true
@@ -75,6 +77,7 @@ const useAuthStore = defineStore('authStore', {
                 this.user.accessToken = this.cookies?.get('accessToken')
                 this.updateUser();
 
+                // Load sub datas from user
                 this.loadProfileDependencies();
                 return true
             } else {
@@ -82,8 +85,8 @@ const useAuthStore = defineStore('authStore', {
                 return false
             }
         },
+        // Logout flow
         logout(): void {
-            // Logout function
             this.cookies?.remove('accessToken')
             this.cookies?.remove('userId')
             this.isLoggedIn = false
@@ -116,11 +119,17 @@ const useAuthStore = defineStore('authStore', {
                 profileID: idGenerator(conf.profileIdLength),
                 accessToken: ""
             }
+
+            // Add user to DB
             await usersApi.addUser(newUser)
+            // redirect to login
             this.showForm = 'login'
+            // Show creation success
             this.setSuccessText('Account created, please login.')
+
             return true;
         },
+        // Forgot password flow, sends email  with new password if the records exists
         async setForgotForm(email: string, newPass: string): Promise<string[] | boolean> {
             let userExists
             let userObj: User;
@@ -145,6 +154,7 @@ const useAuthStore = defineStore('authStore', {
 
             return userExists
         },
+        // Function to check if accessToken/login is still valid, also used on load
         async checkLogStatus(): Promise<void> {
             if (this.cookies && this.cookies.get('accessToken') === null) {
                 this.isLoggedIn = false
@@ -156,26 +166,30 @@ const useAuthStore = defineStore('authStore', {
                 this.loadProfileDependencies();
               }
         },
-        // Setters
+        // Update user
         async updateUser(): Promise<void> {
             if (this.user) {
                 await usersApi.updateUser(this.user)
             }
         },
+        // Sets user
         async setUser(): Promise<void> {
             await usersApi.getUser(this.cookies?.get('userId'))
             .then( (res) => {
                 this.user = res[0]
             })
         },
+        // Set cookies as a local ref from VueCookies
         setCookieObj(cookies: VueCookies | undefined) {
             this.cookies = cookies
         },
+        // Shows the appropriate form relying on mode informed by Logtype (cf. @/types/LogType.ts) login/register/forgot
         setShowForm(mode: LogType) : void {
             this.showForm = mode
             this.errorText = null
             this.successText = null
         },
+        // Text switcher for login messages
         setErrorText(text: string) {
             this.errorText = text
             this.successText = null
@@ -184,9 +198,11 @@ const useAuthStore = defineStore('authStore', {
             this.errorText = null
             this.successText = text
         },
+        // Token validity checker to operate on the DB
         checkToken(): boolean {
             return this.user?.accessToken === this.cookies?.get('accessToken')
         },
+        // Load sub DB elements such as Summary, Experience, Education ... etc
         loadProfileDependencies(): void {
             // Load syb profile parts on login and check if logged (refresh)
             if (this.user != null) {

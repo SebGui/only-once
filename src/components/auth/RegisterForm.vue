@@ -33,6 +33,9 @@
     import {Md5} from 'ts-md5';
     import conf from '@/../onceConfig'
 
+    // Dev log
+    import myLog from '@/composables/utils/myLog';
+
     const authStore = useAuthStore()
 
     // Login refs
@@ -47,7 +50,7 @@
     }
 
     const handleRegister = () => {
-        console.log("register handler")
+        myLog("register handler")
         // Salt and hash user data
         const hashedLogin = Md5.hashStr(conf.salt + login.value)
         const hashedPassword = Md5.hashStr(conf.salt + password.value)

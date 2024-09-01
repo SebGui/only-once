@@ -2,9 +2,14 @@
     <div class="experienceBlock">
         <h3>Experience</h3>
 
+        <section v-if="experiences.length > 0" @click="toggleCreateExperience" class="clickableSection createExperience createExperienceSmall">
+            <span>Add Experience</span>
+        </section>
+
         <section class="viewExperience borders profileData" v-if="experiences.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
-            <div class="singleExperience" v-for="item in experiences" :key="item.id">
-                <ActionsComp @deleteClicked="handleDelete" @editClicked="handleEdit"/>
+
+            <div class="singleExperience borders" v-for="item in experiences" :key="item.id">
+                <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)" class="adjustExperienceActions"/>
 
                 <p>Experience name :</p>
                 <span>{{ item.expName }}</span>
@@ -30,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-      import { ref, defineEmits } from 'vue'
+  import { ref, defineEmits } from 'vue'
   import useExperienceStore from '@/stores/experienceStore';
   import { storeToRefs } from 'pinia';
-  import conf from '@/../onceConfig';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
+  import myLog from '@/composables/utils/myLog';
 
   // Emit custom events setup
   const emit = defineEmits(['addExperience', 'editExperience', 'deleteExperience'])
@@ -53,27 +58,41 @@
     emit('addExperience')
   }
 
-  const editExperience = () => { // add id
-    emit('editExperience') // add id
+  // Emitters from handlers
+  const editExperience = (id:string) => {
+    emit('editExperience', id)
   }
-  const deleteExperience = async (id:string) => { // add id
+  const deleteExperience = async (id:string) => {
     await experienceStore.deleteExperience(id)
-    emit('deleteExperience') // ad id
+    emit('deleteExperience', id)
   }
 
-  const handleDelete = (id:string) => { // add id
-    if (conf.devMode === true) {console.log(`Delete Experience with id :  ${id}`);}
-    deleteExperience(id) // add id
+  // Direct listeners handleers
+  const handleDelete = (id:string) => {
+    myLog(`Delete Experience with id :  ${id}`)
+    deleteExperience(id)
   }
-  const handleEdit = () => { // add id
-    console.log("Edit");
-    editExperience() // add id
+  const handleEdit = (id:string) => {
+    myLog("Edit");
+    editExperience(id)
   }
 
 </script>
 
 <style scoped>
 .experienceBlock {
-        width:100%;
-    }
+  width:100%;
+}
+.adjustExperienceActions {
+  bottom:17px;
+}
+.createExperienceSmall {
+  height:18px;
+  width: 65%;
+  margin: auto;
+  padding: 5px;
+}
+.singleExperience {
+  padding: 10px 10px 35px 10px;
+}
 </style>

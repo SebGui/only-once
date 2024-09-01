@@ -22,8 +22,10 @@
   import Status from '@/types/Status';
   import { defineProps, PropType, ref } from 'vue';
 
+  // Store init
   const authStore = useAuthStore();
 
+  // Props init & definition
   const props = defineProps({
     options : {
         required:true,
@@ -35,13 +37,16 @@
     }
   })
 
+  // Current value reference
   const currentValueRef = ref<number>(props.currentValue)
 
+  // Show hide management
   let dropdownShown = ref<boolean>(false)
   const toggleDropdown = ():void => {
     dropdownShown.value = !dropdownShown.value
   }
 
+  // Select flow
   const handleSelect = (theOption: Status): void => {
     currentValueRef.value = theOption
     if (authStore !== null && authStore.user !== null) {

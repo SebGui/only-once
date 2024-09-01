@@ -6,6 +6,7 @@ import profilesApi from '@/composables/api/Profile'
 
 import useSummaryStore from './summaryStore'
 import useExperienceStore from './experienceStore'
+import myLog from '@/composables/utils/myLog'
 
 type State = {
     profile: Profile | null
@@ -13,7 +14,8 @@ type State = {
 }
 // From authStore initialise profile id?
 // json-server multi id search : /category?&paramName=X1&paramName=X2&paramName=X3&paramName=X4
-//http://localhost:3000/users?&userID=tub4Xj&userID=6ltKMO
+// http://localhost:3000/users?&userID=tub4Xj&userID=6ltKMO (Not working...)
+
 const useProfileStore = defineStore('profileStore', {
     state: (): State => ({
         profile: null,
@@ -32,24 +34,35 @@ const useProfileStore = defineStore('profileStore', {
             }
         },
         async setProfileID(profileID: string) : Promise<void> {
-            console.log('SetProfileID : ');
+            myLog('SetProfileID : ')
             this.profileID = profileID
             await this.getProfileObj()
             if (this.profile !== null) {
                 this.setSummaryID(this.profile.summaryID)
                 this.setExperienceID(this.profile.experienceIDs)
-                // Set foreign keys objs
+                // Set foreign keys objs to load related datas: skills, languages, educations ...
             }
         },
 
         /* Experience related */
+        addExperienceID(experienceID: string): void {
+            if (this.profile !== null) {
+                // Update profile obj for our store
+                this.profile.experienceIDs.push(experienceID)
+
+                // Update profile obj in DB
+                this.updateProfile()
+            }
+        },
         async setExperienceID(experienceIDs: string[]): Promise<void> {
             if (this.profile !== null) {
-                this.profile.experienceIDs = experienceIDs
+                //this.profile.experienceIDs = experienceIDs
 
+                // Set experiencesIDs in our experienceStore
                 const experienceStore = useExperienceStore()
                 experienceStore.setExperiences(experienceIDs)
-                console.log("Here" + experienceIDs);
+
+                // Get experiences
                 await experienceStore.getAllExperiences()
             }
         },
@@ -61,22 +74,21 @@ const useProfileStore = defineStore('profileStore', {
                     this.profile.experienceIDs.splice(index, 1);//Update profile id's
                 }
 
+                // Update profile on DB
                 this.updateProfile()
             }
         },
 
         /* Summary related */
         async setSummaryID(summaryID: string): Promise<void> {
-            console.log('Set summary id');
-            console.log(this.profile);
+            myLog(this.profile);
             if (this.profile !== null) {
                 this.profile.summaryID = summaryID
 
                 const summaryStore = useSummaryStore(); 
                 summaryStore.setSummary(summaryID)
                 await summaryStore.getSummary()
-                console.log(summaryStore.summary);
-                //this.updateProfile()
+                myLog(summaryStore.summary);
             }
         },
         async deleteSummaryID(): Promise<void> {

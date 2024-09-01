@@ -31,6 +31,7 @@
   import { storeToRefs } from 'pinia';
   import config from '@/../onceConfig';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
+  import myLog from '@/composables/utils/myLog';
 
   // Emit custom events setup
   const emit = defineEmits(['addSummary', 'editSummary', 'deleteSummary'])
@@ -49,6 +50,7 @@
     emit('addSummary')
   }
 
+  // Emmiter for hadnlers
   const editSummary = () => {
     emit('editSummary')
   }
@@ -57,22 +59,15 @@
     emit('deleteSummary')
   }
 
+  // Handlers from listeners
   const handleDelete = () => {
-    console.log("Delete");
+    myLog("Delete");
     deleteSummary()
   }
   const handleEdit = () => {
-    if (config.devMode === true) {console.log('Edit');}
-    console.log("Edit");
+    myLog('Edit')
+    myLog("Edit");
     editSummary()
-  }
-
-  /* Testing */
-  const handleConfirm = () => {
-    console.log("confirmed");
-  }
-  const handleCancel = () => {
-    console.log("Canceled");
   }
 </script>
 

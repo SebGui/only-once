@@ -14,6 +14,19 @@
       "profileID": "oGmROsq"
     },
     {
+      "id": "bnvcn",
+      "userID": "tub4Xj",
+      "login": "cf5630d1974e53c275ccbafcb4b82e70",
+      "password": "68965c211316af308ec22589eba8f9d4",
+      "email": "acc@bvv.cbb",
+      "googleID": "",
+      "lastLoggedIn": 0,
+      "createdAt": 1723716877173,
+      "updatedAt": 1723800850437,
+      "Status": 1,
+      "profileID": "oGmROsq"
+    },
+    {
       "id": "2267",
       "userID": "6ltKMO",
       "login": "0ff2a1d41dc2e7eedfb378c7eb94f293",
@@ -46,7 +59,8 @@
       "id": "kj0N2KU",
       "summaryID": "EuL6gRHd",
       "experienceIDs": [
-        "1"
+        "1",
+        "J8MO8DZK"
       ],
       "firstName": "toto",
       "lastName": "tata",
@@ -73,20 +87,20 @@
       "expName": "Lead dev",
       "companyName": "Grata",
       "expDesc": "in charge of various thing for a company that was realy worth it ...",
-      "startedOn": 0,
-      "endedOn" : 0,
+      "startedOn": 1723803372552,
+      "endedOn": 0,
       "createdAt": 1725101208114,
       "updatedAt": 1725101208114
     },
     {
-      "id": "2",
-      "expName": "dev",
-      "companyName": "Cerbex",
-      "expDesc": "a desc",
-      "startedOn": 0,
-      "endedOn" : 0,
-      "createdAt": 1725101208114,
-      "updatedAt": 1725101208114
+      "id": "J8MO8DZK",
+      "expName": "Another experience 8",
+      "companyName": "ExperienceWorld",
+      "expDesc": "Was a great experience at experience world ...",
+      "startedOn": 1725840000000,
+      "endedOn": 1727395200000,
+      "createdAt": 1725194560383,
+      "updatedAt": 1725194560383
     }
   ]
 }
