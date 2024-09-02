@@ -7,18 +7,23 @@ const requestMaker = async (uri: string, options?: object) : Promise<any> => {
         authStore.logout();
         throw("accessToken mismatch or corrupted, please login again")
     }
-    const res = await fetch(uri, options)
-    const data = await res.json()
 
-    return data
+    try {
+        const res = await fetch(uri, options)
+        return await res.json()
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 // eslint-disable-next-line
 const prelogRequestMaker = async (uri: string, options?: object) : Promise<any> => {
-    const res = await fetch(uri, options)
-    const data = await res.json()
-
-    return data
+    try {
+        const res = await fetch(uri, options)
+        return await res.json()
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 
