@@ -39,24 +39,23 @@
 
             <FormKit
               type="date"
-              value="1999-01-01"
               label="Start date"
               help="Enter your first day date in that company"
-              validation="required"
+              :validation="`required|date_before:${endedOn}`"
               validation-visibility="live"
               v-model="startedOn"
             />
 
             <FormKit
               type="date"
-              value="1999-01-01"
               label="End date"
               help="Enter your last day date in that company (Today if you are still in position)"
-              validation="required"
+              :validation="`required|date_after:${startedOn}`"
               validation-visibility="live"
               outer-class="formNoBottomBorder"
               v-model="endedOn"
             />
+            <!-- Make checkbox for "Still in this position" -->
 
         </FormKit>
     </div>
@@ -79,7 +78,6 @@
         required: false,
         type: String
       }
-      //id
   })
 
   const emit = defineEmits(['closeModal'])
@@ -105,8 +103,8 @@
     expName.value = currentExperience.expName
     companyName.value = currentExperience.companyName
     expDesc.value = currentExperience.expDesc
-    startedOn.value = new Date(currentExperience.startedOn).toISOString().split('T')[0] // Formate date following FormKit requirement : yyyy-mm-dd
-    endedOn.value = new Date(currentExperience.endedOn).toISOString().split('T')[0] // Formate date following FormKit requirement : yyyy-mm-dd
+    startedOn.value = new Date(currentExperience.startedOn).toISOString().split('T')[0] // Format date following FormKit requirement : yyyy-mm-dd
+    endedOn.value = new Date(currentExperience.endedOn).toISOString().split('T')[0] // Format date following FormKit requirement : yyyy-mm-dd
   }
 
   // Handle form submit
