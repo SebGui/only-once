@@ -39,7 +39,6 @@
   import useExperienceStore from '@/stores/experienceStore';
   import { storeToRefs } from 'pinia';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
-  import myLog from '@/composables/utils/myLog';
 
   // Emit custom events setup
   const emit = defineEmits(['addExperience', 'editExperience', 'deleteExperience'])
@@ -50,17 +49,17 @@
 
   // Conditionnal rendering
   const showCreateExperience = ref<boolean>(false)
-  const showActions = ref<boolean>(false)
+  //const showActions = ref<boolean>(false)
 
   // Logic functions
   const toggleCreateExperience = (): void => {
     showCreateExperience.value = !showCreateExperience.value
-    emit('addExperience')
+    emit('addExperience', 'experience') // emitName, formType
   }
 
   // Emitters from handlers
   const editExperience = (id:string) => {
-    emit('editExperience', id)
+    emit('editExperience', 'experience', true, id) // emitName, formType, editMode, Id
   }
   const deleteExperience = async (id:string) => {
     await experienceStore.deleteExperience(id)
@@ -69,11 +68,9 @@
 
   // Direct listeners handleers
   const handleDelete = (id:string) => {
-    myLog(`Delete Experience with id :  ${id}`)
     deleteExperience(id)
   }
   const handleEdit = (id:string) => {
-    myLog("Edit");
     editExperience(id)
   }
 

@@ -9,7 +9,7 @@ const config = {
   salt: 'rpYhu39483y43hfilew[q03-i0923uriuuhsfkhuw',
   emailTemplate : 'Hi Only-Once user, your new password is : $password',
   uris: {
-    // Api calls
+    // Api calls : Move to a json-server route file
     // Users related
     getUsers: baseApi + 'users',
     getUser: baseApi + 'users?userID=',
@@ -30,6 +30,11 @@ const config = {
     addUserExperience: baseApi + 'experiences',
     updateUserExperience:  baseApi + 'experiences/',
     deleteUserExperience:  baseApi + 'experiences/',
+    // Educations
+    getUserEducations: baseApi + 'edcuations?userID=',
+    addUserEducation: baseApi + 'edcuations',
+    updateUserEducation:  baseApi + 'edcuations/',
+    deleteUserEducation:  baseApi + 'edcuations/',
   },
   SideNav: [
     {id: 1, name: 'Option 1', icon: 'fingerprint'},

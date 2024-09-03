@@ -2,9 +2,8 @@ import conf from '@/../onceConfig'
 import Experience from '@/types/Experience'
 
 import rm from './requestMaker'
-import myLog from '../utils/myLog'
 
-const getAllUserExperiences = async (ids: string[]): Promise<Experience[]> => {
+const getAllUserExperiences = async (): Promise<Experience[]> => {
     return rm.requestMaker(conf.uris.getUserExperiences, {});
 }
 

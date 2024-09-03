@@ -3,38 +3,55 @@
         <h2>Profile</h2>
         <section class="profileContent">
             <!-- Summary block component -->
-            <SummaryComp @addSummary="showSummaryForm" @editSummary="editSummary" @deleteSummary="deleteSummary"/>
+            <SummaryComp @addSummary="showForm" @editSummary="showForm" @deleteSummary="deleteSummaryFromProfile"/><!--@addSummary="showSummaryForm" / @editSummary="editSummary"-->
 
             <!-- Experiences block component -->
-            <ExperienceComp @addExperience="showExperienceForm" @editExperience="editExperience" @deleteExperience="deleteExperience"/>
+            <ExperienceComp @addExperience="showForm" @editExperience="showForm" @deleteExperience="deleteExperienceFromProfile"/><!--@addExperience="showExperienceForm" / @editExperience="editExperience"-->
 
+            <!-- Education block component -->
+            <EducationComp @addEducation="showForm" @editEducation="showForm"/> <!--@addEducation="showEducationForm" / @deleteEducation="deleteEducation"-->
 
             <!-- Language block component -->
             <!-- Skills block component -->
-            <!-- Education block component -->
 
             <div v-if="showModal === true" class="modal" @click.self="closeModal">
                 <!-- Show forms in here ? -->
                 <SummaryForm v-if="showSummary === true" :isEdit="isEdit" @closeModal="closeModal"/>
-                <ExperienceForm v-if="showExperience === true" :isEdit="isEdit" :expID="expIdToEdit" @closeModal="closeModal"/>
+                <ExperienceForm v-if="showExperience === true" :isEdit="isEdit" :expID="idToEdit" @closeModal="closeModal"/>
+                <EducationForm v-if="showEducation === true" :isEdit="isEdit" :expID="idToEdit" @closeModal="closeModal"/>
             </div>
         </section>
     </div>
 </template>
 
 <script setup lang="ts">
+  // Summary imports
   import SummaryComp from '@/components/profile/SummaryComp.vue';
   import SummaryForm from '@/components/profile/SummaryForm.vue';
+
+  // Experience imports
   import ExperienceComp from '@/components/profile/ExperienceComp.vue';
   import ExperienceForm from '@/components/profile/ExperienceForm.vue';
+
+  // Education imports
+  import EducationComp from '@/components/profile/EducationComp.vue';
+  import EducationForm from '@/components/profile/EducationForm.vue';
+
+  // Types store and core imports
   import useProfileStore from '@/stores/profileStore';
+  import formType from '@/types/FormType';
   import { ref } from 'vue'
 
   const profileStore = useProfileStore()
 
   // Modal logic
   const isEdit = ref<boolean>(false) // Control edit mode
-  const expIdToEdit = ref<string>(''); // Bears the concerned element id
+  const idToEdit = ref<string>(''); // Bears the concerned element id
+
+  // Form to be revealed on modal view
+  const showSummary = ref<boolean>(false)
+  const showExperience = ref<boolean>(false)
+  const showEducation = ref<boolean>(false)
 
   const showModal = ref<boolean>(false)
   const toggleModal = () => {
@@ -46,46 +63,51 @@
     isEdit.value = false // Set edit to false
   }
 
-  // Summary Logic
-  const showSummary = ref<boolean>(false)
-  const showSummaryForm = (): void => {
-    resetFormVisibility() // Hide all forms
-    showSummary.value = true // Show concerned form
-    toggleModal() // Reveal modal
+  const showForm = (type:formType, edit?:boolean, id?:string): void => {
+    //console.log(type, edit, id);
+
+    // Construct editMode if true
+    if (edit === true) {
+      isEdit.value = true
+      if (id !== undefined)
+        idToEdit.value = id
+    }
+
+    // Hide all forms
+    resetFormVisibility()
+
+    // Set concerned type to true
+    switch (type) {
+      case 'summary':
+        showSummary.value = true
+        break;
+      case 'experience':
+        showExperience.value = true
+        break;
+      case 'education':
+        showEducation.value = true
+        break;
+      default:
+        console.log(`Sorry, we are out of ${type}.`);
+    }
+
+    // Reveal modal with defined presets
+    toggleModal()
   }
-  const editSummary = () => {
-    isEdit.value = true // Set edit mode
-    resetFormVisibility() // Hide all forms
-    showSummary.value = true // Show concerned form
-    toggleModal() // Reveal modal
-  }
-  const deleteSummary = async () => {
+
+  const deleteSummaryFromProfile = async () => {
     await profileStore.setSummaryID('')
   }
 
-  // Experience Logic
-  const showExperience = ref<boolean>(false)
-  const showExperienceForm = (): void => {
-    resetFormVisibility() // Hide all forms
-    showExperience.value = true // Show concerned form
-    toggleModal() // Reveal modal
-  }
-  const editExperience = (id:string) => {
-    isEdit.value = true // Set edit mode
-    expIdToEdit.value = id // Reference the id to be loaded
-    resetFormVisibility() // Hide all forms
-    showExperience.value = true // Show concerned form
-    toggleModal() // Reveal modal
-  }
-  const deleteExperience = async (id: string) => {
+  const deleteExperienceFromProfile = async (id: string) => {
     await profileStore.deleteExperienceID(id)
   }
-
 
   // Global modal reseter
   const resetFormVisibility = () => {
     showSummary.value = false
     showExperience.value = false
+    showEducation.value = false
   }
 </script>
 

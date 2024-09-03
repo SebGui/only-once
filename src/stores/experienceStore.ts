@@ -31,7 +31,7 @@ const useExperienceStore = defineStore('experienceStore', {
                     })
         },
         async getAllExperiences(): Promise<void> {
-            await experienceApi.getAllUserExperiences(this.experiencesIDs)
+            await experienceApi.getAllUserExperiences()
                     .then(async (res) => {
                         // For some reason multiple id search doesn't work on json-server
                         // So we have to get all then filter the result

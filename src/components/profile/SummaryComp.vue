@@ -41,17 +41,17 @@
 
   // Conditionnal rendering
   const showCreateSummary = ref<boolean>(false)
-  const showActions = ref<boolean>(false)
+  //const showActions = ref<boolean>(false)
 
   // Logic functions
   const toggleCreateSummary = (): void => {
     showCreateSummary.value = !showCreateSummary.value
-    emit('addSummary')
+    emit('addSummary', 'summary') // emitName, formType
   }
 
   // Emmiter for hadnlers
   const editSummary = () => {
-    emit('editSummary')
+    emit('editSummary', 'summary', true) // emitName, formType, editMode
   }
   const deleteSummary = async () => {
     await summaryStore.deleteSummary()
