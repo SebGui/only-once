@@ -41,6 +41,7 @@
     showModal.value = !showModal.value // Reveals the modal vie
   }
   const closeModal = (): void => {
+    showModal.value = false;
     resetFormVisibility() // Hide all forms
     isEdit.value = false // Set edit to false
   }
