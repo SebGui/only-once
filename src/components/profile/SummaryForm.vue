@@ -3,7 +3,7 @@
       <h1 v-if="props.isEdit === true">Edit summary</h1>
       <h1 v-else>Create summary</h1>
 
-        <FormKit type="form" id="myForm" @submit="handleSubmit">
+        <FormKit type="form" id="summaryForm" @submit="handleSubmit">
 
             <!-- Summary: Textarea -->
             <FormKit
@@ -126,8 +126,9 @@
       // Update summary values
       summary.value.summary = summaryText.value
       summary.value.salary = salary.value
-      summary.value.companySize = companySize.value;
+      summary.value.companySize = companySize.value
       summary.value.companyType = companyType.value
+      summary.value.updatedAt = new Date().getTime()
 
       // Sync to DB
       await summaryStore.updateSummary()
@@ -157,7 +158,7 @@
 </script>
 
 <style scoped>
-    #myForm {
+    #summaryForm {
         width:60%;
     }
 </style>

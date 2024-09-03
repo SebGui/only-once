@@ -130,7 +130,7 @@
           expDesc: expDesc.value,
           startedOn: new Date(startedOn.value).getTime(),
           endedOn: new Date(endedOn.value).getTime(),
-          createdAt: new Date().getTime(),
+          createdAt: currentExperience.createdAt,
           updatedAt: new Date().getTime(),
       }
 
