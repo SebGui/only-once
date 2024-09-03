@@ -109,31 +109,40 @@
 
   // Handle form submit
   const handleSubmit = async (): Promise<void> => {
-    const profileStore = useProfileStore()
-
     // Edit experience
     if (props.isEdit === true && props.expID) {
-        // Experience object init
-        const updatedExperience:Experience = {
-            id: props.expID,
-            expName: expName.value,
-            companyName: companyName.value,
-            expDesc: expDesc.value,
-            startedOn: new Date(startedOn.value).getTime(),
-            endedOn: new Date(endedOn.value).getTime(),
-            createdAt: new Date().getTime(),
-            updatedAt: new Date().getTime(),
-        }
-
-        // Start update experience flow
-        await experienceStore.updateExperience(updatedExperience)
-
-        // Hide modal
-        emit('closeModal')
-        return
+      editExperience()
+    } else {
+      addExperience()
     }
 
+    // Hide modal
+    emit('closeModal')
+  }
+
+  const editExperience = async () => {
+    if (props.expID) {
+      // Experience object init
+      const updatedExperience:Experience = {
+          id: props.expID,
+          expName: expName.value,
+          companyName: companyName.value,
+          expDesc: expDesc.value,
+          startedOn: new Date(startedOn.value).getTime(),
+          endedOn: new Date(endedOn.value).getTime(),
+          createdAt: new Date().getTime(),
+          updatedAt: new Date().getTime(),
+      }
+
+      // Start update experience flow
+      await experienceStore.updateExperience(updatedExperience)
+    }
+  }
+
+  const addExperience = async () => {
     // Add experience
+    const profileStore = useProfileStore()
+
     // Experience object init
     const newExperience:Experience = {
         id: idGenerator(8),
@@ -146,14 +155,10 @@
         updatedAt: new Date().getTime(),
     }
 
-    // Start add experience flow
+    // AddExperience DB sync
     await experienceStore.addExperience(newExperience).then(() => {
-        console.log('adding to profile');
         profileStore.addExperienceID(newExperience.id)
     })
-
-    // Hide modal
-    emit('closeModal')
   }
 </script>
 

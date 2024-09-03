@@ -79,7 +79,6 @@
   import idGenerator from '@/composables/utils/idGenerator';
   import Summary from '@/types/Summary';
   import config from '@/../onceConfig';
-  import myLog from '@/composables/utils/myLog';
 
   // Stores init
   const summaryStore = useSummaryStore();
@@ -109,21 +108,33 @@
   // Emit definition
   const emit = defineEmits(['closeModal'])
 
-  const handleSubmit = async (): Promise<void> => {
-    // Submit as edit mode
+  const handleSubmit = (): void => {
     if (summary.value !== null && props.isEdit === true) {
+      // Submit as edit mode
+      editSummary()
+    } else {
+      // Submit as add mode
+      addSummary()
+    }
+
+    // Close modal [ToDo] : spinner & success
+    emit('closeModal')
+  }
+
+  const editSummary = async () => {
+    if (summary.value !== null) {
+      // Update summary values
       summary.value.summary = summaryText.value
       summary.value.salary = salary.value
       summary.value.companySize = companySize.value;
       summary.value.companyType = companyType.value
 
+      // Sync to DB
       await summaryStore.updateSummary()
-      emit('closeModal')
-      return
     }
+  }
 
-    // Submit as add mode
-
+  const addSummary = async () => {
     // New Summary object init
     const newSummary: Summary = {
       id: idGenerator(8),
@@ -140,10 +151,8 @@
       await profileStore.setSummaryID(newSummary.id)
       await profileStore.updateProfile()
     }
-
-    //Make a view for data succesfully saved
-    emit('closeModal')
   }
+
   // Add firstname, lastname, profilePicture, phoneNumber, address?vue-google-autocomplete
 </script>
 

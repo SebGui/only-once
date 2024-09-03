@@ -31,7 +31,6 @@
   import { storeToRefs } from 'pinia';
   import config from '@/../onceConfig';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
-  import myLog from '@/composables/utils/myLog';
 
   // Emit custom events setup
   const emit = defineEmits(['addSummary', 'editSummary', 'deleteSummary'])
@@ -61,12 +60,9 @@
 
   // Handlers from listeners
   const handleDelete = () => {
-    myLog("Delete");
     deleteSummary()
   }
   const handleEdit = () => {
-    myLog('Edit')
-    myLog("Edit");
     editSummary()
   }
 </script>

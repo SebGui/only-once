@@ -41,7 +41,7 @@
   const currentValueRef = ref<number>(props.currentValue)
 
   // Show hide management
-  let dropdownShown = ref<boolean>(false)
+  const dropdownShown = ref<boolean>(false)
   const toggleDropdown = ():void => {
     dropdownShown.value = !dropdownShown.value
   }
