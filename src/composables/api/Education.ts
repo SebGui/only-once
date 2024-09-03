@@ -8,7 +8,7 @@ const getUserEducations = async (id: string): Promise<Education[]> => {
 }
 
 const addUserEducation = async (education: Education): Promise<boolean> => {
-    return rm.requestMaker(conf.uris.addUserExperience, {
+    return rm.requestMaker(conf.uris.addUserEducation, {
         method: 'POST',
         body: JSON.stringify(education),
         headers: {'Content-Type': 'application/json'}

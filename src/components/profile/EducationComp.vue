@@ -1,15 +1,15 @@
 <template>
-    <section class="experienceBlock">
+    <section class="educationBlock">
         <h3>Education</h3>
 
         <section v-if="educations.length > 0" @click="toggleCreateEducation" class="clickableSection createEducation createEducationSmall">
             <span>Add Education</span>
         </section>
 
-        <section class="viewExperience borders profileData" v-if="educations.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
+        <section class="viewEducation borders profileData" v-if="educations.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
 
-            <div class="singleExperience borders" v-for="item in educations" :key="item.id">
-                <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)" class="adjustExperienceActions"/>
+            <div class="singleEducation borders" v-for="item in educations" :key="item.id">
+                <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)"/>
 
                 <p>School name :</p>
                 <span>{{ item.schoolName }}</span>
@@ -63,7 +63,7 @@
   }
   const deleteEducation = async (id:string) => {
     await educationStore.deleteEducation(id)
-    //emit('deleteEducation', id) // With Now useless with new logic
+    //emit('deleteEducation', id) // Now useless with new logic
   }
 
   // Direct listeners handleers
@@ -78,9 +78,6 @@
 <style scoped>
 .educationBlock {
   width:100%;
-}
-.adjustEducationActions {
-  bottom:17px;
 }
 .createEducationSmall {
   height:18px;

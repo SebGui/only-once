@@ -87,10 +87,10 @@
       "expName": "Lead dev",
       "companyName": "Grata",
       "expDesc": "in charge of various thing for a company that was realy worth it ...",
-      "startedOn": 1723803372552,
-      "endedOn": 0,
+      "startedOn": 1470009600000,
+      "endedOn": 1688169600000,
       "createdAt": 1725101208114,
-      "updatedAt": 1725101208114
+      "updatedAt": 1725365468047
     },
     {
       "id": "J8MO8DZK",
@@ -101,6 +101,19 @@
       "endedOn": 1727395200000,
       "createdAt": 1725194560383,
       "updatedAt": 1725194560383
+    }
+  ],
+  "educations": [
+    {
+      "id": "1OaHHuUG",
+      "userID": "D5lXKb",
+      "schoolName": "Epitech",
+      "degreeName": "Master in IT",
+      "educationDesc": "A great experience overall, a lot a thing learnt",
+      "startedOn": 1219881600000,
+      "endedOn": 1372809600000,
+      "createdAt": 1725364408139,
+      "updatedAt": 1725364408139
     }
   ]
 }

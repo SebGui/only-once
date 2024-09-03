@@ -31,10 +31,10 @@ const config = {
     updateUserExperience:  baseApi + 'experiences/',
     deleteUserExperience:  baseApi + 'experiences/',
     // Educations
-    getUserEducations: baseApi + 'edcuations?userID=',
-    addUserEducation: baseApi + 'edcuations',
-    updateUserEducation:  baseApi + 'edcuations/',
-    deleteUserEducation:  baseApi + 'edcuations/',
+    getUserEducations: baseApi + 'educations?userID=',
+    addUserEducation: baseApi + 'educations',
+    updateUserEducation:  baseApi + 'educations/',
+    deleteUserEducation:  baseApi + 'educations/',
   },
   SideNav: [
     {id: 1, name: 'Option 1', icon: 'fingerprint'},

@@ -6,7 +6,6 @@ import profilesApi from '@/composables/api/Profile'
 
 import useSummaryStore from './summaryStore'
 import useExperienceStore from './experienceStore'
-import myLog from '@/composables/utils/myLog'
 
 type State = {
     profile: Profile | null
@@ -34,7 +33,6 @@ const useProfileStore = defineStore('profileStore', {
             }
         },
         async setProfileID(profileID: string) : Promise<void> {
-            myLog('SetProfileID : ')
             this.profileID = profileID
             await this.getProfileObj()
             if (this.profile !== null) {
@@ -81,14 +79,12 @@ const useProfileStore = defineStore('profileStore', {
 
         /* Summary related */
         async setSummaryID(summaryID: string): Promise<void> {
-            myLog(this.profile);
             if (this.profile !== null) {
                 this.profile.summaryID = summaryID
 
                 const summaryStore = useSummaryStore(); 
                 summaryStore.setSummary(summaryID)
                 await summaryStore.getSummary()
-                myLog(summaryStore.summary);
             }
         },
         async deleteSummaryID(): Promise<void> {

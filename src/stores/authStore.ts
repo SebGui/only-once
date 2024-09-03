@@ -22,6 +22,7 @@ import usersApi from '@/composables/api/User'
 
 // Other stores auto load
 import useProfileStore from '@/stores/profileStore'
+import useEducationStore from './educationStore'
 
 // State type of the authentication store
 type State = {
@@ -208,6 +209,8 @@ const useAuthStore = defineStore('authStore', {
             if (this.user != null) {
                 const profileStore = useProfileStore();
                 profileStore.setProfileID(this.user.profileID)
+                const educationStore = useEducationStore()
+                educationStore.getEducation()
             }
         }
     }

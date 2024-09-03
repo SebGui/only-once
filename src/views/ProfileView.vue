@@ -3,13 +3,13 @@
         <h2>Profile</h2>
         <section class="profileContent">
             <!-- Summary block component -->
-            <SummaryComp @addSummary="showForm" @editSummary="showForm" @deleteSummary="deleteSummaryFromProfile"/><!--@addSummary="showSummaryForm" / @editSummary="editSummary"-->
+            <SummaryComp @addSummary="showForm" @editSummary="showForm" @deleteSummary="deleteSummaryFromProfile"/>
 
             <!-- Experiences block component -->
-            <ExperienceComp @addExperience="showForm" @editExperience="showForm" @deleteExperience="deleteExperienceFromProfile"/><!--@addExperience="showExperienceForm" / @editExperience="editExperience"-->
+            <ExperienceComp @addExperience="showForm" @editExperience="showForm" @deleteExperience="deleteExperienceFromProfile"/>
 
             <!-- Education block component -->
-            <EducationComp @addEducation="showForm" @editEducation="showForm"/> <!--@addEducation="showEducationForm" / @deleteEducation="deleteEducation"-->
+            <EducationComp @addEducation="showForm" @editEducation="showForm"/>
 
             <!-- Language block component -->
             <!-- Skills block component -->
@@ -18,7 +18,7 @@
                 <!-- Show forms in here ? -->
                 <SummaryForm v-if="showSummary === true" :isEdit="isEdit" @closeModal="closeModal"/>
                 <ExperienceForm v-if="showExperience === true" :isEdit="isEdit" :expID="idToEdit" @closeModal="closeModal"/>
-                <EducationForm v-if="showEducation === true" :isEdit="isEdit" :expID="idToEdit" @closeModal="closeModal"/>
+                <EducationForm v-if="showEducation === true" :isEdit="isEdit" :eduID="idToEdit" @closeModal="closeModal"/>
             </div>
         </section>
     </div>
@@ -54,6 +54,7 @@
   const showEducation = ref<boolean>(false)
 
   const showModal = ref<boolean>(false)
+
   const toggleModal = () => {
     showModal.value = !showModal.value // Reveals the modal vie
   }
@@ -63,6 +64,7 @@
     isEdit.value = false // Set edit to false
   }
 
+  // The parameters are passed from the @/components/profile/${ModuleName}Comp.vue (emit params)
   const showForm = (type:formType, edit?:boolean, id?:string): void => {
     //console.log(type, edit, id);
 

@@ -66,6 +66,14 @@ const useEducationStore = defineStore('educationStore', {
             })
 
         },
+
+        // Get single education
+        getEducationWithId(id:string):Education {
+            return this.educations.filter((item) => {
+                if (id === item.id)
+                    return true
+            })[0]
+        }
     }
 })
 
