@@ -5,12 +5,14 @@ import {defineStore} from 'pinia'
 type State = {
     experiences : Experience[]
     experiencesIDs : string[]
+    isLoading: boolean
 }
 
 const useExperienceStore = defineStore('experienceStore', {
     state : (): State => ({
         experiences : [],
-        experiencesIDs: []
+        experiencesIDs: [],
+        isLoading: true
     }),
     getters : {
     },
@@ -45,6 +47,7 @@ const useExperienceStore = defineStore('experienceStore', {
                                 }
                             }
                         })
+                        this.isLoading = false
                     })
         },
         async setExperience(experienceId: string): Promise<void> {

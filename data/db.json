@@ -57,7 +57,7 @@
   "profiles": [
     {
       "id": "kj0N2KU",
-      "summaryID": "EuL6gRHd",
+      "summaryID": "kEGBVFMd",
       "experienceIDs": [
         "1",
         "J8MO8DZK"
@@ -72,13 +72,13 @@
   ],
   "summaries": [
     {
-      "id": "EuL6gRHd",
-      "summary": "A quick summary about myself...",
-      "salary": "82908",
+      "id": "kEGBVFMd",
+      "summary": "A summary",
+      "salary": "116571",
       "companyType": "4",
       "companySize": "2",
-      "createdAt": 1725101208114,
-      "updatedAt": 1725101208114
+      "createdAt": 1725367607848,
+      "updatedAt": 1725367607848
     }
   ],
   "experiences": [

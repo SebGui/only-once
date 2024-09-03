@@ -2,35 +2,43 @@
     <div class="experienceBlock">
         <h3>Experience</h3>
 
-        <section v-if="experiences.length > 0" @click="toggleCreateExperience" class="clickableSection createExperience createExperienceSmall">
-            <span>Add Experience</span>
-        </section>
+        <template v-if="experienceStore.isLoading === true"> 
+          <OnceSpinner className="spinnerInProfile" size="80" color="var(--main-bg-color)" />
+        </template>
+        <template v-else>
 
-        <section class="viewExperience borders profileData" v-if="experiences.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
+          <section v-if="experiences.length > 0" @click="toggleCreateExperience" class="clickableSection createExperience createExperienceSmall">
+              <span>Add Experience</span>
+          </section>
 
-            <div class="singleExperience borders" v-for="item in experiences" :key="item.id">
-                <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)" class="adjustExperienceActions"/>
+          <section class="viewExperience borders profileData" v-if="experiences.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
 
-                <p>Experience name :</p>
-                <span>{{ item.expName }}</span>
+              <div class="singleExperience borders" v-for="item in experiences" :key="item.id">
+                  <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)" class="adjustExperienceActions"/>
 
-                <p>Company name :</p>
-                <span>{{ item.companyName }}</span>
+                  <p>Experience name :</p>
+                  <span>{{ item.expName }}</span>
 
-                <p>Experience description :</p>
-                <span>{{ item.expDesc }}</span>
+                  <p>Company name :</p>
+                  <span>{{ item.companyName }}</span>
 
-                <p>Started on :</p>
-                <span>{{ new Date(item.startedOn).toDateString() }}</span>
+                  <p>Experience description :</p>
+                  <span>{{ item.expDesc }}</span>
 
-                <p>Ended on :</p>
-                <span>{{ new Date(item.endedOn).toDateString() }}</span>
-            </div>
-        </section>
-        <section @click="toggleCreateExperience" class="clickableSection createExperience" v-else>
-            <!--show create summary form-->
-            <h3>Create Experience</h3>
-        </section>
+                  <p>Started on :</p>
+                  <span>{{ new Date(item.startedOn).toDateString() }}</span>
+
+                  <p>Ended on :</p>
+                  <span>{{ new Date(item.endedOn).toDateString() }}</span>
+              </div>
+
+          </section>
+          <section @click="toggleCreateExperience" class="clickableSection createExperience" v-else>
+              <!--show create experience form-->
+              <h3>Create Experience</h3>
+          </section>
+
+        </template>
     </div>
 </template>
 
@@ -39,6 +47,7 @@
   import useExperienceStore from '@/stores/experienceStore';
   import { storeToRefs } from 'pinia';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
+  import OnceSpinner from '../subcomponents/OnceSpinner.vue';
 
   // Emit custom events setup
   const emit = defineEmits(['addExperience', 'editExperience', 'deleteExperience'])

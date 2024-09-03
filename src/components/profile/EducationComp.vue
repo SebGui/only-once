@@ -2,35 +2,41 @@
     <section class="educationBlock">
         <h3>Education</h3>
 
-        <section v-if="educations.length > 0" @click="toggleCreateEducation" class="clickableSection createEducation createEducationSmall">
-            <span>Add Education</span>
-        </section>
+        <!-- Spinner template check-->
+        <template v-if="educationStore.isLoading === true"> 
+           <OnceSpinner className="spinnerInProfile" size="80" color="var(--main-bg-color)" />
+        </template>
+        <template v-else>
+            <section v-if="educations.length > 0" @click="toggleCreateEducation" class="clickableSection createEducation createEducationSmall">
+                <span>Add Education</span>
+            </section>
 
-        <section class="viewEducation borders profileData" v-if="educations.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
+            <section class="viewEducation borders profileData" v-if="educations.length > 0"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
 
-            <div class="singleEducation borders" v-for="item in educations" :key="item.id">
-                <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)"/>
+                <div class="singleEducation borders" v-for="item in educations" :key="item.id">
+                    <ActionsComp @deleteClicked="handleDelete(item.id)" @editClicked="handleEdit(item.id)"/>
 
-                <p>School name :</p>
-                <span>{{ item.schoolName }}</span>
+                    <p>School name :</p>
+                    <span>{{ item.schoolName }}</span>
 
-                <p>Degree :</p>
-                <span>{{ item.degreeName }}</span>
+                    <p>Degree :</p>
+                    <span>{{ item.degreeName }}</span>
 
-                <p>Description :</p>
-                <span>{{ item.educationDesc }}</span>
+                    <p>Description :</p>
+                    <span>{{ item.educationDesc }}</span>
 
-                <p>Started on :</p>
-                <span>{{ new Date(item.startedOn).toDateString() }}</span>
+                    <p>Started on :</p>
+                    <span>{{ new Date(item.startedOn).toDateString() }}</span>
 
-                <p>Ended on :</p>
-                <span>{{ new Date(item.endedOn).toDateString() }}</span>
-            </div>
-        </section>
-        <section @click="toggleCreateEducation" class="clickableSection createEducation" v-else>
-            <!--show create summary form-->
-            <h3>Create Education</h3>
-        </section>
+                    <p>Ended on :</p>
+                    <span>{{ new Date(item.endedOn).toDateString() }}</span>
+                </div>
+            </section>
+            <section @click="toggleCreateEducation" class="clickableSection createEducation" v-else>
+                <!--show create summary form-->
+                <h3>Create Education</h3>
+            </section>
+        </template>
     </section>
 </template>
 
@@ -39,6 +45,7 @@
   import useEducationStore from '@/stores/educationStore';
   import { storeToRefs } from 'pinia';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
+  import OnceSpinner from '../subcomponents/OnceSpinner.vue';
 
   // Emit custom events setup
   const emit = defineEmits(['addEducation', 'editEducation', 'deleteEducation'])

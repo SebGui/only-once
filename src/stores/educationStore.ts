@@ -5,11 +5,13 @@ import {defineStore} from 'pinia'
 
 type State = {
     educations: Education[]
+    isLoading: boolean
 }
 
 const useEducationStore = defineStore('educationStore', {
     state: (): State => ({
-        educations: []
+        educations: [],
+        isLoading: true
     }),
     getters: {},
     actions: {
@@ -21,6 +23,7 @@ const useEducationStore = defineStore('educationStore', {
                 await educationApi.getUserEducations(authStore.user.userID)
                     .then(async (res) => {
                         this.educations = res;
+                        this.isLoading = false
                     })
             }
         },

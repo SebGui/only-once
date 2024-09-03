@@ -2,26 +2,31 @@
     <div class="summaryBlock">
         <h3>Summary</h3>
 
-        <section class="viewSummary borders profileData" v-if="summary?.id"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
-            <ActionsComp @deleteClicked="handleDelete" @editClicked="handleEdit"/> <!-- v-if="showActions === true" -->
+        <template v-if="summaryStore.isLoading === true"> 
+          <OnceSpinner className="spinnerInProfile" size="80" color="var(--main-bg-color)" />
+        </template>
+        <template v-else>
+          <section class="viewSummary borders profileData" v-if="summary?.id"> <!-- @mouseenter="showActions = true" @mouseleave="showActions = false" --> 
+              <ActionsComp @deleteClicked="handleDelete" @editClicked="handleEdit"/> <!-- v-if="showActions === true" -->
 
-            <p>Your summary :</p>
-            <span>{{ summary.summary }}</span>
+              <p>Your summary :</p>
+              <span>{{ summary.summary }}</span>
 
-            <p>Expected salary :</p>
-            <span>{{ summary.salary }} euros</span>
+              <p>Expected salary :</p>
+              <span>{{ summary.salary }} euros</span>
 
-            <p>Prefered company size :</p>
-            <span>{{ config.companySize[parseInt(summary.companySize)-1].label }}</span>
+              <p>Prefered company size :</p>
+              <span>{{ config.companySize[parseInt(summary.companySize)-1].label }}</span>
 
-            <p>Prefered company Type :</p>
-            <span>{{ config.companyType[parseInt(summary.companyType)-1].label }}</span>
+              <p>Prefered company Type :</p>
+              <span>{{ config.companyType[parseInt(summary.companyType)-1].label }}</span>
 
-        </section>
-        <section @click="toggleCreateSummary" class="clickableSection createSummary" v-else>
-            <!--show create summary form-->
-            <h3>Create summary</h3>
-        </section>
+          </section>
+          <section @click="toggleCreateSummary" class="clickableSection createSummary" v-else>
+              <!--show create summary form-->
+              <h3>Create summary</h3>
+          </section>
+        </template>
     </div>
 </template>
 
@@ -31,6 +36,7 @@
   import { storeToRefs } from 'pinia';
   import config from '@/../onceConfig';
   import ActionsComp from '../subcomponents/ActionsComp.vue';
+  import OnceSpinner from '../subcomponents/OnceSpinner.vue';
 
   // Emit custom events setup
   const emit = defineEmits(['addSummary', 'editSummary', 'deleteSummary'])

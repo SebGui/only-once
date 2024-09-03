@@ -1,16 +1,19 @@
 import {defineStore} from 'pinia'
 import Summary from '@/types/Summary'
 import summaryApi from '@/composables/api/Summary'
+import { nextTick } from 'vue'
 
 type State = {
     summary: Summary | null
     summaryID: string
+    isLoading: boolean
 }
 
 const useSummaryStore = defineStore('summaryStore', {
     state: (): State => ({
         summary: null,
-        summaryID: ''
+        summaryID: '',
+        isLoading: true
     }),
     getters: {},
     actions: {
@@ -22,6 +25,9 @@ const useSummaryStore = defineStore('summaryStore', {
             await summaryApi.getUserSummary(this.summaryID)
                     .then(async (res) => {
                         this.summary = res
+                        await nextTick().then(() => {
+                            this.isLoading = false
+                        })
                     })
         },
         async setSummary(summaryId: string): Promise<void> {

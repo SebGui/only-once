@@ -84,6 +84,9 @@
 .floatingForm h1 {
     font-size: 26px;
 }
+.spinnerInProfile {
+    margin:50px;
+}
 
 body {
     font-family: Avenir, Helvetica, Arial, sans-serif;
