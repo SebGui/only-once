@@ -46,12 +46,12 @@
       "password": "611aece50e5f742db42e4d4b260502d5",
       "email": "sebastien.guibourdin@gmail.com",
       "googleID": "",
-      "lastLoggedIn": 1725016705860,
+      "lastLoggedIn": 1725873364203,
       "createdAt": 1723803372552,
       "updatedAt": 1723803372552,
       "Status": 2,
       "profileID": "kj0N2KU",
-      "accessToken": "onsUybKZj0vXINwg2towuibDrUtqdfAX1CFytiJDhF9cJwSr5KId39NZqevoI4Ao"
+      "accessToken": "pIczC5y0Ao42e494CjHUmIHXAowI3w24gbKzxfFzk6bH6x3mnBd63oaoGX8JS3KO"
     }
   ],
   "profiles": [
@@ -61,6 +61,9 @@
       "experienceIDs": [
         "1",
         "J8MO8DZK"
+      ],
+      "skillsIDs": [
+        "g1f23d"
       ],
       "firstName": "toto",
       "lastName": "tata",
@@ -114,6 +117,14 @@
       "endedOn": 1372809600000,
       "createdAt": 1725364408139,
       "updatedAt": 1725364408139
+    }
+  ],
+  "skills" : [
+    {
+      "id": "g1f23d",
+      "skillName" : "VueJS",
+      "expertise": 5,
+      "order" : 1
     }
   ]
 }

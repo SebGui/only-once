@@ -1,5 +1,5 @@
 <template>
-    <div class="summaryBlock">
+    <section class="summaryBlock">
         <h3>Summary</h3>
 
         <template v-if="summaryStore.isLoading === true"> 
@@ -27,7 +27,7 @@
               <h3>Create summary</h3>
           </section>
         </template>
-    </div>
+      </section>
 </template>
 
 <script setup lang="ts">

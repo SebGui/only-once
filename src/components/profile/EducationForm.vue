@@ -43,6 +43,7 @@
               help="Enter when did you start your degree"
               :validation="`required|date_before:${endedOn}`"
               validation-visibility="live"
+              :max="today"
               v-model="startedOn"
             />
 
@@ -81,6 +82,8 @@
   })
 
   const emit = defineEmits(['closeModal'])
+
+  const today = new Date().toISOString().split('T')[0]
 
   // education store init
   const educationStore = useEducationStore()

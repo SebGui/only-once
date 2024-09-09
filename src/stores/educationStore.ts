@@ -25,6 +25,8 @@ const useEducationStore = defineStore('educationStore', {
                         this.educations = res;
                         this.isLoading = false
                     })
+            } else {
+                this.isLoading = false
             }
         },
         // Add Education

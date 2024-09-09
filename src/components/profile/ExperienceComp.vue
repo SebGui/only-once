@@ -1,5 +1,5 @@
 <template>
-    <div class="experienceBlock">
+    <section class="experienceBlock">
         <h3>Experience</h3>
 
         <template v-if="experienceStore.isLoading === true"> 
@@ -39,7 +39,7 @@
           </section>
 
         </template>
-    </div>
+      </section>
 </template>
 
 <script setup lang="ts">

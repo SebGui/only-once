@@ -62,6 +62,11 @@ const config = {
     { label: 'Start-up', value: '3'},
     { label: 'Scale-up', value: '4' },
     { label: 'Large', value: '5' }
+  ],
+  languageExpertise: [
+    { label: 'Limited', value: '1'},
+    { label: 'Fluent', value: '2'},
+    { label: 'Bilingual - Native', value: '3'}
   ]
   
 }

@@ -7,6 +7,7 @@ type Profile = {
     address:string
     summaryID: string
     experienceIDs: string[]
+    skillsIDs: string[]
     createdAt: number
     updatedAt: number
 }

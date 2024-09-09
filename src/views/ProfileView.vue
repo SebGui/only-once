@@ -11,8 +11,10 @@
             <!-- Education block component -->
             <EducationComp @addEducation="showForm" @editEducation="showForm"/>
 
-            <!-- Language block component -->
             <!-- Skills block component -->
+             <SkillsComp />
+
+            <!-- Language block component -->
 
             <div v-if="showModal === true" class="modal" @click.self="closeModal">
                 <!-- Show forms in here ? -->
@@ -36,6 +38,9 @@
   // Education imports
   import EducationComp from '@/components/profile/EducationComp.vue';
   import EducationForm from '@/components/profile/EducationForm.vue';
+
+  // Skills imports
+  import SkillsComp from '@/components/profile/SkillsComp.vue';
 
   // Types store and core imports
   import useProfileStore from '@/stores/profileStore';

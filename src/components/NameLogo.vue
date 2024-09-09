@@ -1,8 +1,8 @@
 <template>
-    <div class="unselectable">
+    <section class="unselectable">
         <i class="material-icons">swipe_right</i>
         <span>{{ name }}</span>
-    </div>
+    </section>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +16,7 @@
 </script>
 
 <style scoped>
-    div {
+    section {
         color:white;
         font-weight: bold;
     }

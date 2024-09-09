@@ -70,6 +70,16 @@
     font-size: 18px;
     color: var(--form-label-color);
 }
+/* [START] temporary, missing icons overide */
+.formkit-controls {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+.formkit-controls li {
+    margin:5px;
+}
+/* [END] temporary, missing icons overide */
 .floatingForm {
     background-color: var(--main-bg-white);
     margin: auto auto;

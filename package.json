@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@formkit/icons": "^1.6.5",
+    "@formkit/pro": "^0.127.0",
     "@formkit/themes": "^1.6.5",
     "@formkit/vue": "^1.6.5",
     "core-js": "^3.8.3",

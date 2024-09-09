@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
+import keys from '@/../keys'
 
 // FormKit
 import { plugin, defaultConfig } from '@formkit/vue'
 import '@formkit/themes/genesis'
+
+import { createProPlugin, inputs } from '@formkit/pro'
+//import { rootClasses } from '../formkit.theme'//'@formkit/themes'
+const pro = createProPlugin(keys.formkit.key, inputs)
 
 // Pinia
 import { createPinia } from 'pinia'
@@ -25,6 +30,11 @@ createApp(App)
 .use(router)
 .use(createPinia())
 .use(VueSpinnersPlugin)
-.use(plugin, defaultConfig)
+.use(plugin, defaultConfig(
+    { 
+        plugins: [pro],
+        //config: { rootClasses } 
+      }
+))
 .use(VueCookies, {expires: config.accessTokenExpires})
 .mount('#app')

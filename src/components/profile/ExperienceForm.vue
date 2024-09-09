@@ -43,6 +43,7 @@
               help="Enter your first day date in that company"
               :validation="`required|date_before:${endedOn}`"
               validation-visibility="live"
+              :max="today"
               v-model="startedOn"
             />
 
@@ -92,6 +93,7 @@
   const startedOn = ref<string>('')
   const endedOn = ref<string>('')
 
+  const today = new Date().toISOString().split('T')[0]
 
   // Setups for edit experience
   let currentExperience

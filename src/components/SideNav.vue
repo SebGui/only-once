@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <section>
         <ul class="sideNav">
             <li v-for="item in options" :key="item.id"><!-- Will be router links-->
                 <i class="material-icons">{{ item.icon }}</i>
                 <span>{{ item.name }}</span>
             </li>
         </ul>
-    </div>
+    </section>
 </template>
 
 <script setup lang="ts">
