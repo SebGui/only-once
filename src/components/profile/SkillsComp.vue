@@ -15,9 +15,9 @@
             >
               <FormKit
                 id="repeater"
-                name="users"
+                name="skills"
                 type="repeater"
-                label="Users"
+                label="skills"
                 min="1"
                 max="20"
               >
@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+  import { FormKit } from '@formkit/vue';
   import OnceSpinner from '@/components/subcomponents/OnceSpinner.vue'
 
   // test valuws

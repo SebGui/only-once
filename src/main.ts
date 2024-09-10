@@ -4,9 +4,9 @@ import keys from '@/../keys'
 // FormKit
 import { plugin, defaultConfig } from '@formkit/vue'
 import '@formkit/themes/genesis'
+import '@formkit/pro/genesis'
 
 import { createProPlugin, inputs } from '@formkit/pro'
-//import { rootClasses } from '../formkit.theme'//'@formkit/themes'
 const pro = createProPlugin(keys.formkit.key, inputs)
 
 // Pinia
@@ -19,7 +19,7 @@ import VueCookies from 'vue-cookies'
 import config from '@/../onceConfig'
 
 // Spinners
-import { VueSpinnersPlugin } from 'vue3-spinners';
+import { VueSpinnersPlugin } from 'vue3-spinners'
 
 import App from './App.vue'
 import router from './router'
@@ -32,7 +32,7 @@ createApp(App)
 .use(VueSpinnersPlugin)
 .use(plugin, defaultConfig(
     { 
-        plugins: [pro],
+        plugins: [pro]
         //config: { rootClasses } 
       }
 ))
