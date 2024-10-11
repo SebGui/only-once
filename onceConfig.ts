@@ -8,6 +8,7 @@ const config = {
   profileIdLength: 7,
   salt: 'rpYhu39483y43hfilew[q03-i0923uriuuhsfkhuw',
   emailTemplate : 'Hi Only-Once user, your new password is : $password',
+  maxSkill : "20",// maxSkills for repeater input @/components/profile/SkillsComp
   uris: {
     // Api calls : Move to a json-server route file
     // Users related

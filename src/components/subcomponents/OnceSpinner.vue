@@ -1,5 +1,5 @@
 <template>
-    <VueSpinnerGrid :class="className" :size="size" :color="color" />
+    <VueSpinnerGrid :class="props.className" :size="props.size" :color="props.color" />
 </template>
 
 <script setup lang="ts">
