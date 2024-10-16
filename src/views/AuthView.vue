@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="authContainer">
         <!--<h1>Auth page</h1>-->
 
         <div class="borders loginContent">
@@ -28,6 +28,14 @@
     }
     .borders {
         max-width: 1000px;
+    }
+    .authContainer {
+        width: 100vw;
+        height: 100vh;
+        margin-top: 0;
+        position: absolute;
+        top: 0;
+        background-color: var(--main-bg-color-darken);
     }
 
     /* Tablet */

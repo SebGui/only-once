@@ -75,6 +75,8 @@
     }
     input {
         margin: 10px 0;
+        height: 30px;
+        padding-left:10px;
     }
     button {
         margin-top:20px;
@@ -82,16 +84,16 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        transition: var(--transition-time);
+    }
+    #loginForm button:hover, #loginForm button:active {
+        background-color:white;
+        color: var(--main-bg-color)
     }
     .switchAuth {
         margin-bottom:10px;
     }
-    .switchAuth span {
-        cursor:pointer;
-    }
-    .switchAuth span:hover {
-        color: var(--main-text-color-hover);
-    }
+
     .errorText {
         color: var(--main-error-color);
     }
@@ -113,6 +115,23 @@
         color:white;
         background-color: var(--main-bg-color-darken);
     }
+    @media (min-width: 1024px) {
+        .switchAuth {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .switchAuth button {
+            margin:10px;
+         }
+         .loginContent {
+            margin: 30vh auto;
+         }
+         #loginForm button {
+            margin-top:20px;
+            margin-bottom:20px;
+         }
+    }
 
     /* Tablet */
     @media (max-width: 1024px) {
@@ -130,6 +149,7 @@
             justify-content: center;
             align-items: center;
             height: 100%;
+            width: 100vw;
         }
         #loginForm {
             width: 100%;
@@ -137,7 +157,7 @@
         #loginForm input {
             height:40px;
             font-size: 16px;
-            padding: 5px;
+            padding-left: 20px;
         }
         #loginForm button {
             width:50%;
