@@ -25,6 +25,7 @@
 <style scoped>
     .loginContent {
         background-color: var(--main-bg-color);
+        margin: 30vh auto;
     }
     .borders {
         max-width: 1000px;
@@ -41,7 +42,6 @@
     /* Tablet */
     @media (max-width: 1024px) {
         .loginContent {
-            background-color:yellow;/* toRemove() */
             width: 100vw;
             height: 100vh;
             border: none;
@@ -54,7 +54,6 @@
     /* Phone */
     @media (max-width: 768px) {
         .loginContent {
-            background-color:blue;/* toRemove() */
             width: 100vw;
             height: 100vh;
             border: none;
