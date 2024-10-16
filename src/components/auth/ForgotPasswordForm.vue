@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div class="forgotContainer">
+        <div class="forgotIcon">
+            <i class="material-icons">psychology_alt</i>
+         </div>
+
         <form @submit.prevent="handleForgotEmail" id="forgotForm" ref="form">
             <input type="email" placeholder="Enter your email..." name="user_email" v-model="email" required autofocus>
             <input type="text" name="user_name" value='Only-Once user' hidden>
@@ -8,13 +12,24 @@
             <span v-if="authStore.errorText != null" class="errorText">{{ authStore.errorText }}</span>
             <span v-if="authStore.successText != null" class="successText">{{ authStore.successText }}</span>
 
-            <button>Submit</button>
+            <button>
+                <i class="material-icons">psychology_alt</i>
+                Submit
+            </button>
         </form>
 
         <div class="switchAuth">
-            <span @click="handleSwitch('login')">Login</span> /
-            <span @click="handleSwitch('register')">Register</span>
+            <button @click="handleSwitch('login')">
+                <i class="material-icons">login</i>
+                Login
+            </button>
+
+            <button @click="handleSwitch('register')">
+                <i class="material-icons">app_registration</i>
+                Forgot password
+            </button>
         </div>
+
     </div>
 </template>
 
@@ -90,23 +105,115 @@
     }
     input {
         margin: 10px 0;
+        height: 30px;
+        padding-left:10px;
     }
     button {
         margin-top:20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition-time);
+    }
+    #forgotForm button:hover, #forgotForm button:active {
+        background-color:white;
+        color: var(--main-bg-color)
     }
     .switchAuth {
         margin-bottom:10px;
-    }
-    .switchAuth span {
-        cursor:pointer;
-    }
-    .switchAuth span:hover {
-        color: var(--main-text-color-hover);
     }
     .errorText {
         color: var(--main-error-color);
     }
     .successText {
         color: var(--main-success-color);
+    }
+    .forgotIcon {
+        display:none;
+        margin: 0px auto;
+    }
+    .forgotContainer {background-color: var(--main-bg-color);}
+
+    .switchAuth i, #forgotForm i {
+        margin-right:10px;
+        font-size:40px;
+    }
+    #forgotForm button {
+        color:white;
+        background-color: var(--main-bg-color-darken);
+    }
+    
+    /* Desktop */
+    @media (min-width: 1024px) {
+        .switchAuth {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .switchAuth button {
+            margin:10px;
+        }
+        .forgotContent {
+           margin: 30vh auto;
+        }
+        #forgotForm button {
+           margin-top:20px;
+           margin-bottom:20px;
+        }
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+        .forgotContent {}
+        .forgotIcon {
+            color:white;
+            display:block;
+        }
+        .forgotIcon .material-icons {
+            font-size: 120px;
+        }
+        .forgotContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100vw;
+        }
+        #forgotForm {
+            width: 100%;
+        }
+        #forgotForm input {
+            height:40px;
+            font-size: 16px;
+            padding-left: 20px;
+        }
+        #forgotForm button {
+            width:50%;
+            height:50px;
+            font-size: 16px;
+            margin-top: 70px;
+            margin: 70px auto 20px auto;
+        }
+        .switchAuth {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width:100%;
+        }
+        .switchAuth button {
+            width:50%;
+            height:50px;
+            font-size: 16px;
+        }
+    }
+    /* Phone */
+    @media (max-width: 768px) {
+        .forgotContent {}
+        .forgotIcon {
+            display:block;
+        }
     }
 </style>
